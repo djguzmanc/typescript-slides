@@ -1,0 +1,29 @@
+.question {
+    flex-direction: column;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-size: contain;
+}
+
+.question__text {
+    background: linear-gradient(90deg, rgba(50,141,204,1) 0%, rgba(2,41,119,1) 30%, rgba(2,41,119,1) 70%, rgba(50,141,204,1) 100%);
+    color: white;
+    border-radius: 40px;
+    font-size: 45px;
+    padding: 10px 30px;
+    width: calc(100vw - 50px);
+    text-align: center;
+    margin: 10px auto 0;
+    border: solid 2px #B9C2D2;
+}
+
+.question__answers {
+    padding: 30px;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+}
