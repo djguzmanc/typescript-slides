@@ -21,8 +21,8 @@ const Answer = ({
                 e.preventDefault();
                 setIsCorrect(!isCorrect);
             }}
-            onClick={e => onSelect()}>
-            <span className="answer__index">{index}:</span>
+            onClick={() => onSelect()}>
+            <span className="answer__index">{index}</span>
             <div className="answer__content">
                 {children}
             </div>

@@ -1,34 +1,41 @@
 .answer {
-    background: linear-gradient(90deg, rgba(50,141,204,1) 0%, rgba(2,41,119,1) 60%, rgba(2,41,119,1) 100%);
-    color: white;
-    border-radius: 40px;
-    font-size: 45px;
-    padding: 10px 30px;
     display: flex;
     align-items: flex-start;
-    color: white;
-    border: solid 2px #B9C2D2;
-    transition: .2s;
+    transition: 0.2s;
+    border: solid 2px #b9c2d2;
+    border-radius: 40px;
+    background: linear-gradient(90deg, rgba(50, 141, 204, 1) 0%, rgba(2, 41, 119, 1) 60%, rgba(2, 41, 119, 1) 100%);
     cursor: pointer;
+    padding: 10px 30px;
+    color: white;
+    color: white;
+    font-size: 45px;
+}
+
+.answer__content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    text-shadow: 2px 2px 3px black;
 }
 
 .answer:nth-child(2n) {
-    background: linear-gradient(90deg, rgba(2,41,119,1) 0, rgba(2,41,119,1) 40%, rgba(50,141,204,1) 100%);
+    background: linear-gradient(90deg, rgba(2, 41, 119, 1) 0, rgba(2, 41, 119, 1) 40%, rgba(50, 141, 204, 1) 100%);
 }
 
 .answer__index {
-    color: #E7A90B;
     margin-right: 10px;
+    color: #e7a90b;
 }
 
 .answer--selected {
-    background: radial-gradient(circle, rgba(231,206,47,1) 0%, rgba(153,96,18,1) 100%) !important;
-    transition: .2s;
+    transition: 0.2s;
+    background: radial-gradient(circle, rgba(231, 206, 47, 1) 0%, rgba(153, 96, 18, 1) 100%) !important;
 }
 
 .answer--correct {
-    background: radial-gradient(circle, rgba(203,201,9,1) 0%, rgba(89,114,11,1) 100%) !important;
-    transition: .2s;
+    transition: 0.2s;
+    background: radial-gradient(circle, rgba(203, 201, 9, 1) 0%, rgba(89, 114, 11, 1) 100%) !important;
 }
 
 .answer--selected .answer__index {
