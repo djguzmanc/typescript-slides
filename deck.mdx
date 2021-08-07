@@ -6,12 +6,22 @@ import {
 import { github, vsDark } from "@code-surfer/themes";
 import Question from './components/Question/Question';
 import Answer from './components/Answer/Answer';
+import Wildcard from './components/Wildcard/Wildcard';
+import WildcardSet from './components/WildcardSet/WildcardSet';
 
 export const theme = vsDark;
 
 # Hello 👋
 
 You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](https://codesurfer.pomb.us)
+
+---
+
+<WildcardSet>
+  <Wildcard type="PHONE" used />
+  <Wildcard type="PUBLIC" selected />
+  <Wildcard type="FIFTY" />
+</WildcardSet>
 
 ---
 
