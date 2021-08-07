@@ -8,6 +8,11 @@ import Question from './components/Question/Question';
 import Answer from './components/Answer/Answer';
 import Wildcard from './components/Wildcard/Wildcard';
 import WildcardSet from './components/WildcardSet/WildcardSet';
+import { 
+  pluckError,
+  pluckSuggestion,
+  neverError
+} from './assets/images/ts-intellisense/index';
 
 export const theme = vsDark;
 
@@ -59,152 +64,303 @@ You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](h
 
 ---
 
-#### keyof Example
-
 <CodeSurfer>
 
-```js
-function
+```ts title="keyof Example"
+const pluck = (obj, keyName) => {
+  return obj[keyName];
+}
+
+const pluckedName = pluck({ 
+  name: 'Julian', 
+  age: 26
+}, 'name');
+
+console.log(pluckedName);
+// Julian
+```
+
+```ts title="keyof Example"
+type SmartGuy = { 
+  name: string, 
+  age: number
+};
+const pluck = (obj: SmartGuy, keyName: 'name' | 'age') => {
+  return obj[keyName];
+}
+
+const pluckedName = pluck({ 
+  name: 'Julian', 
+  age: 26
+}, 'name');
+
+console.log(pluckedName);
+// Julian
+```
+
+```diff 5[31:54]
+```
+
+```ts title="keyof Example"
+type SmartGuy = { 
+  name: string, 
+  age: number
+};
+const pluck = (obj: SmartGuy, keyName: keyof SmartGuy) => {
+  return obj[keyName];
+}
+
+const pluckedName = pluck({ 
+  name: 'Julian', 
+  age: 26
+}, 'name');
+
+console.log(pluckedName);
+// Julian
+```
+
+```diff 5[40:54]
+```
+
+```diff 12[4:9]
 ```
 
 </CodeSurfer>
 
 ---
 
+### Error
+<img src={pluckError} />
+
+### Suggestion
+<img src={pluckSuggestion} />
+
+---
+
+<Question question={
+  "Cuál es la sintaxis para iterar todas las propiedades de otro objeto"
+}>
+  <Answer>
+    type MyType {'{'} <br />
+      &nbsp;&nbsp;[P in keyof OtherType]: OtherType[P]<br />
+    {'}'}
+  </Answer>
+  <Answer>
+    type MyType {'{'} <br />
+      &nbsp;&nbsp;[key in OtherType]: OtherType[key]<br />
+    {'}'}
+  </Answer>
+  <Answer>
+    <span style={{ fontSize: '40px' }}>
+      type MyType {'{'} <br />
+        &nbsp;&nbsp;[foreach key in OtherType]: OtherType[key]<br />
+      {'}'}
+    </span>
+  </Answer>
+  <Answer>
+    type MyType {'{'} <br />
+      &nbsp;&nbsp;[OtherType: key]: OtherType[key]<br />
+    {'}'}
+  </Answer>
+</Question>
+
+---
+
 <CodeSurfer>
 
-```js title="This is a title" subtitle="and this a subtitle"
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return sit
-    ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor)
-    : [];
-}
+```ts title="Keys iteration"
+type Warrior = {
+  strength: number;
+  name: string;
+  suitColor: string;
+};
 
-function incididunt(ipsum, ut = 1) {
-  ut = labore.et(amet(ut), 0);
-  const sit = ipsum == null ? 0 : ipsum.sit;
-
-  if (!sit || ut < 1) {
-    return [];
-  }
-
-  let dolore = 0;
-  let magna = 0;
-  const aliqua = new eiusmod(labore.ut(sit / ut));
-
-  while (dolore < sit) {
-    aliqua[magna++] = consectetur(
-      ipsum,
-      dolore,
-      (dolore += ut)
-    );
-  }
-
-  return aliqua;
-}
+/**
+ * If your tsconfig file is set to strict null checks,
+ * this null assign will throw an error
+ */
+const warrior: Warrior = {
+  name: 'Mauricio',
+  strength: null,
+  suitColor: 'red',
+};
 ```
 
-```js
-function lorem(ipsum, dolor = 1) {
-  const sit = ipsum == null ? 0 : ipsum.sit;
-  dolor = sit - amet(dolor);
-  return sit
-    ? consectetur(ipsum, 0, dolor < 0 ? 0 : dolor)
-    : [];
+```ts title="Keys iteration"
+type Warrior = {
+  strength: number;
+  name: string;
+  suitColor: string;
+};
+
+// Let's make every property nullable!
+// Wolololoooooooooo 🧙
+type ConvertedWarrior = {
+  [P in keyof Warrior]: Warrior[P] | null;
 }
 
-function adipiscing(...elit) {
-  if (!elit.sit) {
-    return [];
-  }
-
-  const sed = elit[0];
-  return eiusmod.tempor(sed) ? sed : [sed];
-}
-
-function incididunt(ipsum, ut = 1) {
-  ut = labore.et(amet(ut), 0);
-  const sit = ipsum == null ? 0 : ipsum.sit;
-
-  if (!sit || ut < 1) {
-    return [];
-  }
-
-  let dolore = 0;
-  let magna = 0;
-  const aliqua = new eiusmod(labore.ut(sit / ut));
-
-  while (dolore < sit) {
-    aliqua[magna++] = consectetur(
-      ipsum,
-      dolore,
-      (dolore += ut)
-    );
-  }
-
-  return aliqua;
-}
+const warrior: Warrior = {
+  name: 'Mauricio',
+  strength: null,
+  suitColor: 'red',
+};
 ```
 
-```diff 1[10:14],2[15:19],3[22:27],10:12
+```ts title="Keys iteration"
+type Warrior = {
+  strength: number;
+  name: string;
+  suitColor: string;
+};
 
+// Let's make every property nullable!
+// Wolololoooooooooo 🧙
+type ConvertedWarrior = {
+  [P in keyof Warrior]: Warrior[P]?;
+}
+
+const warrior: Warrior = {
+  name: 'Mauricio',
+  strength: null,
+  suitColor: 'red',
+};
+```
+
+```ts title="Keys iteration"
+type Warrior = {
+  strength: number;
+  name: string;
+  suitColor: string;
+};
+
+// Let's make every property nullable!
+// Wolololoooooooooo 🧙
+type ConvertedWarrior = {
+  [P in keyof Warrior]: Warrior[P] | AnotherType;
+}
+
+const warrior: Warrior = {
+  name: 'Mauricio',
+  strength: null,
+  suitColor: 'red',
+};
+```
+
+```ts title="Keys iteration"
+type Warrior = {
+  strength: number;
+  name: string;
+  suitColor: string;
+};
+
+// Let's make every property nullable!
+// Wolololoooooooooo 🧙
+type ConvertedWarrior = {
+  [P in keyof Warrior]: ComplexObj<Warrior[P]>;
+}
+
+const warrior: Warrior = {
+  name: 'Mauricio',
+  strength: null,
+  suitColor: 'red',
+};
 ```
 
 </CodeSurfer>
 
 ---
 
-<CodeSurferColumns themes={[vsDark, github]}>
-
-<Step>
-
-```js
-const magna = aliqua => aliqua.ut((enim, ad) => enim, 0);
-```
-
-```js
-const minim = (ad, enim) => dolore.magna(ad / enim);
-```
-
-</Step>
-
-<Step>
-
-```js
-const lorem = (ipsum, dolor, sit) => {
-  const amet = dolor - ipsum;
-  return consectetur.adipiscing(
-    {
-      elit: sed.eiusmod(sit - dolor) / amet + 2,
-    },
-    (tempor, incididunt) => ipsum + amet * incididunt
-  );
-};
-
-const magna = aliqua => aliqua.ut((enim, ad) => enim, 0);
-```
-
-```js
-const minim = (ad, enim) => dolore.magna(ad / enim);
-
-const sed = (eiusmod, tempor, incididunt) => {
-  const ut = tempor - eiusmod;
-  return labore.et(
-    {
-      amet: dolore.magna(incididunt - tempor) / ut + 2,
-    },
-    (aliqua, elit) => eiusmod + ut * elit
-  );
-};
-```
-
-</Step>
-
-</CodeSurferColumns>
+<Question question={
+  <span>Qué significa la palabra reservada <i>never</i></span>
+}>
+  <Answer>
+    Permite que las propiedades de un objeto 
+    acepten null o undefined a la vez.
+  </Answer>
+  <Answer>
+    Es un tipo de variable indicando que ésta nunca tendrá valor.
+  </Answer>
+  <Answer>
+    Se usa en generics para que un tipo genérico esté restringido
+    a ciertos tipos de variable.
+  </Answer>
+  <Answer>
+    Se usa para que la aplicación&nbsp;<i>never</i>&nbsp;falle.
+  </Answer>
+</Question>
 
 ---
 
-docs:  
-[codesurfer.pomb.us](https://codesurfer.pomb.us)
+<CodeSurfer>
+
+```ts title="never Example"
+type Person = {
+  role: 'ADMIN' | 'PLAYER' | 'CLIENT',
+}
+```
+
+```ts title="never Example"
+type Person = {
+  role: 'ADMIN' | 'PLAYER' | 'CLIENT',
+}
+
+const doSomething = (person: Person) => {
+  switch (person.role) {
+    case 'ADMIN':
+      break;
+    case 'PLAYER':
+      break;
+  }
+}
+```
+
+```ts title="never Example"
+type Person = {
+  role: 'ADMIN' | 'PLAYER' | 'CLIENT',
+}
+
+const doSomething = (person: Person) => {
+  switch (person.role) {
+    case 'ADMIN':
+      break;
+    case 'PLAYER':
+      break;
+    default:
+      // Error here 🥳!
+      const a: never = person.role;
+  }
+}
+```
+
+```diff 5:16
+```
+
+```ts title="never Example"
+const ups = (a: never): never => {
+  throw new Error("Didn't expect to reach here 😨");
+}
+
+const doSomethingSafer = (person: Person) => {
+  switch (person.role) {
+    case 'ADMIN':
+      break;
+    case 'PLAYER':
+      break;
+    case 'CLIENT':
+      break;
+    default:
+      ups(person.role);
+  }
+}
+```
+
+</CodeSurfer>
+
+---
+
+### Error
+<img src={neverError} />
+
+---
+
+# Todo terminó señores

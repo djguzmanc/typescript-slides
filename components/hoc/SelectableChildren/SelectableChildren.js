@@ -7,7 +7,8 @@ const SelectableChildren = ({
 }) => {
     const currentIdx = React.Children
         .toArray(children).findIndex(child => child.props.selected);
-    const [selectedIdx, setSelectedIndex] = useCurrentIndex(currentIdx > -1 ? currentIdx : null);
+    const [selectedIdx, setSelectedIndex] =
+        useCurrentIndex(currentIdx > -1 ? currentIdx : null);
 
     return React.Children.map(children, (child, idx) =>
         React.cloneElement(child, {
