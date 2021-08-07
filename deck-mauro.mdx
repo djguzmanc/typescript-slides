@@ -1,0 +1,351 @@
+import {
+  CodeSurfer,
+  CodeSurferColumns,
+  Step,
+} from "code-surfer";
+import { github, vsDark } from "@code-surfer/themes";
+import Question from './components/Question/Question';
+import Answer from './components/Answer/Answer';
+import Wildcard from './components/Wildcard/Wildcard';
+import WildcardSet from './components/WildcardSet/WildcardSet';
+
+export const theme = vsDark;
+
+## Bienvenidos a TypeScript 🧙💙🤑
+
+Este es un juego diseñado para conocer [TypeScript](https://www.typescriptlang.org/) en tan solo 50 minutos.
+
+---
+
+<WildcardSet>
+  <Wildcard type="PHONE" used />
+  <Wildcard type="PUBLIC" selected />
+  <Wildcard type="FIFTY" />
+</WildcardSet>
+
+---
+
+<Question question="¿Quién fue el creador de Typescript y a qué empresa pertenece?">
+  <Answer>
+    Anders Hejlsberg at Microsoft.
+  </Answer>
+  <Answer>
+    Linus Torvalds at Linux Foundation
+  </Answer>
+  <Answer>
+    Brendan Eich at  Mozilla Corporation's
+  </Answer>
+  <Answer>
+    James Arthur Gosling at Sun Microsystems
+  </Answer>
+</Question>
+
+---
+
+<Question question="¿Es typescript compilado o interpretado?">
+  <Answer>
+    Interpretado, porque los archivos de .TS no son entendidos por el navegador y se genera codigo JS.
+  </Answer>
+  <Answer>
+    Compilado, los navegadores de hoy en dia tienen la capacidad de interpretar archivos .TS
+  </Answer>
+  <Answer>
+    Interpretado, todo el codigo es transpilados a .JS, pero Tambien existe la posibilidad de ser interpretado por los navegadores actuales.
+  </Answer>
+  <Answer>
+    Compilado, TS es capaz de generar un archive binario. 
+  </Answer>
+</Question>
+
+---
+
+<Question question="Cuando no conoces el tipo de una variable o de lo que queremos retornar se debe utilizar por defecto: ">
+  <Answer>
+    Void
+  </Answer>
+  <Answer>
+    Any
+  </Answer>
+  <Answer>
+    Undefined
+  </Answer>
+  <Answer>
+    Null
+  </Answer>
+</Question>
+
+---
+
+<Question question=" Puede asignar cualquier cosa a lo que no conozco,
+  pero lo que no conozco no se puede asignar a nada más que a sí mismo y a cualquiera, 
+  sin realizar una afirmación de tipo de un estrechamiento basado en el flujo de control.
+  Esto hace referencia al type: ">
+  <Answer>
+    Unknown
+  </Answer>
+  <Answer>
+    Any
+  </Answer>
+  <Answer>
+    {"{}"}
+  </Answer>
+  <Answer>
+    Void
+  </Answer>
+</Question>
+
+---
+
+#### Unknown Example
+
+<CodeSurfer>
+
+```js
+function
+```
+
+</CodeSurfer>
+
+---
+
+<Question question="¿Existe una diferencia entre declarar variables var, let y const en JavaScript respecto a Typescript?">
+  <Answer>
+    ¿Enserio me preguntas eso?
+  </Answer>
+  <Answer>
+    No lo se rick, parece falso
+  </Answer>
+  <Answer>
+    Seriedad por favor, si existe una diferencia.
+  </Answer>
+  <Answer>
+    Ni Thanos se habria atrevido a tanto.😄
+  </Answer>
+</Question>
+
+---
+
+<Question question="Si yo quiero colocar un parámetro opcional en una interfaz, función o clase, ¿Cuál es la sintaxis correcta para ello?">
+  <Answer>
+    ?
+  </Answer>
+  <Answer>
+    ??
+  </Answer>
+  <Answer>
+    ???
+  </Answer>
+  <Answer>
+    |
+  </Answer>
+</Question>
+
+---
+
+#### Optional Paramater Example
+
+<CodeSurfer>
+
+```js
+function
+```
+
+</CodeSurfer>
+
+---
+
+<Question question="Como sugiere el nombre, el tipo nunca representa el tipo de valores que nunca ocurren.">
+  <Answer>
+    Never
+  </Answer>
+  <Answer>
+    Undefined
+  </Answer>
+  <Answer>
+    Null
+  </Answer>
+  <Answer>
+    Any
+  </Answer>
+</Question>
+
+---
+
+#### Never Example
+
+<CodeSurfer>
+
+```js
+function
+```
+
+</CodeSurfer>
+
+---
+
+<Question question=" Es una forma sencilla de dar nombres más descriptivos a valores constantes numéricos.">
+  <Answer>
+    Types
+  </Answer>
+  <Answer>
+    Classes
+  </Answer>
+  <Answer>
+    Enums
+  </Answer>
+  <Answer>
+    Objects
+  </Answer>
+</Question>
+
+---
+
+#### Enums Example
+
+<CodeSurfer>
+
+```js
+function
+```
+
+</CodeSurfer>
+
+---
+
+<Question question="TypeScript proporciona tres palabras clave para controlar la visibilidad de los miembros de la clase, como propiedades o métodos.">
+  <Answer>
+    Static, public, private
+  </Answer>
+  <Answer>
+    Public, Void, protected
+  </Answer>
+  <Answer>
+    Static, get, set
+  </Answer>
+  <Answer>
+    Public, protected, private
+  </Answer>
+</Question>
+
+---
+
+#### POO Example
+
+<CodeSurfer>
+
+```js
+function
+```
+
+</CodeSurfer>
+
+---
+
+<Question question="¿De que forma se puede realizar casting en TS?">
+  <Answer>
+    Derived d = new Derived(); Base b = d;
+  </Answer>
+  <Answer>
+    let enteredText = (input as HTMLInputElement).value;
+  </Answer>
+  <Answer>
+    x = int(1)
+  </Answer>
+  <Answer>
+    int myInt = (int) myDouble;
+  </Answer>
+</Question>
+
+---
+
+<Question question="Es una construcción especial en TypeScript que indica que un valor puede ser de varios tipos.">
+  <Answer>
+    let value: string | number = "Foo";
+  </Answer>
+  <Answer>
+    let value: string || number = "Foo";
+  </Answer>
+  <Answer>
+    let value: string && number = "Foo";
+  </Answer>
+  <Answer>
+    let value: string are number = "Foo";
+  </Answer>
+</Question>
+
+---
+
+#### Several Types Example
+
+<CodeSurfer>
+
+```js
+function
+```
+
+</CodeSurfer>
+
+---
+
+<Question question="Permiten combinar los miembros de dos o más tipos mediante este operador. Esto le permite combinar tipos existentes para obtener un solo tipo con todas las funciones que necesita.">
+  <Answer>
+    {"&"}
+  </Answer>
+  <Answer>
+    |
+  </Answer>
+  <Answer>
+    ==
+  </Answer>
+  <Answer>
+    ===
+  </Answer>
+</Question>
+
+---
+
+### Combine Example
+
+<CodeSurfer>
+
+```typescript
+
+```
+
+</CodeSurfer>
+
+---
+
+<Question question="No crean nuevos tipos, sino que crean nuevos nombres que se refieren a ese tipo.">
+  <Answer>
+    let value: alphanumeric;
+  </Answer>
+  <Answer>
+    let value = alphanumeric;
+  </Answer>
+  <Answer>
+    let value is alphanumeric;
+  </Answer>
+  <Answer>
+    let value as alphanumeric;
+  </Answer>
+</Question>
+
+---
+
+#### Type Mapping Example
+
+<CodeSurfer>
+
+```typescript
+type alphanumeric = string | number;
+let value: alphanumeric = "";
+value = 10;
+```
+
+</CodeSurfer>
+
+---
+
+docs:  
+[codesurfer.pomb.us](https://codesurfer.pomb.us)

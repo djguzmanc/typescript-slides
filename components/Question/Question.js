@@ -11,7 +11,7 @@ const Question = ({
 }) => {
     return (
         <main className="question" style={{ backgroundImage: `url(${bg})` }}>
-            <h1 className="question__text">¿{question}?</h1>
+            <h1 className="question__text">{question}</h1>
             <section className="question__answers">
                 <SelectableChildren
                     props={idx => ({ index: indexes[idx] })}>
