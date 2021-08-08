@@ -8,12 +8,14 @@ import Question from './components/Question/Question';
 import Answer from './components/Answer/Answer';
 import Wildcard from './components/Wildcard/Wildcard';
 import WildcardSet from './components/WildcardSet/WildcardSet';
-
+import { optionalError } from './assets/images/ts-intellisense/index';
 export const theme = vsDark;
 
-## Bienvenidos a TypeScript 🧙💙🤑
+<div style={{ fontSize:'30px', margin:'0 auto', padding: '30px'}}>
+  <h1>Bienvenidos a TypeScript 🧙💙🤑</h1>
 
-Este es un juego diseñado para conocer [TypeScript](https://www.typescriptlang.org/) en tan solo 50 minutos.
+  <p>Este es un juego diseñado para conocer <a href="https://www.typescriptlang.org/">[TypeScript]</a> en tan solo 50 minutos.</p>
+</div>
 
 ---
 
@@ -96,12 +98,35 @@ Este es un juego diseñado para conocer [TypeScript](https://www.typescriptlang.
 
 ---
 
-#### Unknown Example
-
 <CodeSurfer>
 
-```js
-function
+```ts title="Unknown Example" 
+function isString(someVariable: unknown): someVariable is string {
+  return true;
+}
+```
+
+```diff 1[10:18]
+```
+
+```diff 1[33:40]
+```
+
+```diff 1[43:65]
+```
+
+```ts title="Unknown Example" 
+function isString(someVariable: unknown): someVariable is string {
+  return true;
+}
+
+let newVariable: unknown;
+if (typeof newVariable === 'string' ) {
+  newVariable.toLowerCase(); 
+}
+```
+
+```diff 7[3:29]
 ```
 
 </CodeSurfer>
@@ -142,44 +167,77 @@ function
 
 ---
 
-#### Optional Paramater Example
-
 <CodeSurfer>
 
-```js
-function
+```ts title="Optional Paramater Example"
+interface IHero 🦸{
+  secretName: string;
+  superPower: string;
+  superAge?: number;
+}
 ```
+
+```diff 1[11:18]
+```
+
+```diff 4
+```
+
+```ts title="Optional Paramater Example"
+interface IHero 🦸{
+  secretName: string;
+  superPower: string;
+  superAge?: number;
+}
+
+class Marvel implements IHero 🦸{ }
+```
+
+```diff 7[7:32]
+```
+
+```ts title="Optional Paramater Example"
+interface IHero 🦸{
+  secretName: string;
+  superPower: string;
+  superAge?: number;
+}
+
+class Marvel implements IHero 🦸{
+  constructor(
+    public secretName: string, 
+    public superPower: string
+    ) { }
+  
+  public getSuperHero(): void {
+    console.log(
+      `The name is ${this.secretName} and his/her superpower is ${this.superPower}`
+      );
+  }
+}
+
+let wonderWoman = new Marvel('Diana', 'Programmer');
+wonderWoman.getSuperHero();
+// Result
+🦸‍♀️
+// The super secret name is Diana and his/her superpower is Programmer
+```
+
+```diff 20
+``` 
+
+```diff 21
+``` 
+
+```diff 24
+``` 
 
 </CodeSurfer>
 
 ---
 
-<Question question="Como sugiere el nombre, el tipo nunca representa el tipo de valores que nunca ocurren.">
-  <Answer>
-    Never
-  </Answer>
-  <Answer>
-    Undefined
-  </Answer>
-  <Answer>
-    Null
-  </Answer>
-  <Answer>
-    Any
-  </Answer>
-</Question>
-
----
-
-#### Never Example
-
-<CodeSurfer>
-
-```js
-function
-```
-
-</CodeSurfer>
+### Warning Implementation
+<img src={optionalError} />
 
 ---
 
@@ -200,12 +258,44 @@ function
 
 ---
 
-#### Enums Example
 
 <CodeSurfer>
 
-```js
-function
+```ts title="Enums Example"
+enum PrintMedia📰{
+  Newspaper = 'NEWSPAPER',
+  Newsletter = 'NEWSLETTER',
+  Magazine = 'MAGAZINE',
+  Book = 'BOOK'
+}
+```
+
+``` diff 1
+```
+
+```ts title="Enums Example"
+enum PrintMedia📰{
+  Newspaper = 'NEWSPAPER',
+  Newsletter = 'NEWSLETTER',
+  Magazine = 'MAGAZINE',
+  Book = 'BOOK'
+}
+
+function getPrintMediaCode(mediaName: string): string {
+  if (mediaName === PrintMedia.Book ) {
+      return `You are selected a ${PrintMedia.Book}`
+  }
+  return PrintMedia.Newspaper;
+}
+```
+
+```diff 9[21:36]
+```
+
+```diff 10[34:53]
+```
+
+```diff 11[10:31]
 ```
 
 </CodeSurfer>
