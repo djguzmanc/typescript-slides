@@ -78,10 +78,7 @@ export const theme = vsDark;
 
 ---
 
-<Question question=" Puede asignar cualquier cosa a lo que no conozco,
-  pero lo que no conozco no se puede asignar a nada más que a sí mismo y a cualquiera, 
-  sin realizar una afirmación de tipo de un estrechamiento basado en el flujo de control.
-  Esto hace referencia al type: ">
+<Question question="Nadie me conoce ni me quiere completamente, Sólo me tengo a mí mism@">
   <Answer>
     Unknown
   </Answer>
@@ -236,8 +233,11 @@ wonderWoman.getSuperHero();
 
 ---
 
-### Warning Implementation
-<img src={optionalError} />
+<div style={{ fontSize:'30px', margin:'0 auto', padding: '30px'}}>
+  <h1>Warning Implementation</h1>
+
+  <img src={optionalError} />
+</div>
 
 ---
 
@@ -319,12 +319,85 @@ function getPrintMediaCode(mediaName: string): string {
 
 ---
 
-#### POO Example
 
 <CodeSurfer>
 
-```js
-function
+```ts title="POO Example"
+class Hero 🦸{
+  constructor(
+    public secretName: string,
+    private _superPower: string,
+    protected isMutant: boolean,
+  ) { }
+
+  public getHero(): void {
+    console.log(`${this.secretName} and ${this._superPower}`);
+  }
+
+  private getSuperPower(): void {
+    console.log(`${this._superPower}`);
+  }
+
+  protected verifyHero(): string {
+    return this.isMutant ? "Es mutante" : "Heroe de sangre pura";
+  }
+
+}
+```
+
+``` diff 3
+``` 
+
+``` diff 4
+``` 
+
+``` diff 5
+``` 
+
+``` diff 8
+``` 
+
+``` diff 12
+``` 
+
+``` diff 16
+``` 
+
+```ts title="POO Example"
+ class Mutant extends Hero {
+  constructor(
+    secretName: string,
+    superPower: string,
+    isMutant: boolean
+  ) {
+    super(secretName, superPower, isMutant);
+  }
+
+  getMutant(): void {
+    this.getHero();
+    console.log(this.verifyHero());
+  }
+}
+```
+
+```diff 7
+```
+
+```diff 10
+```
+
+```diff 11
+```
+
+```diff 12
+```
+
+```ts title="POO Example"
+let scarletWitch = new Hero('Wanda', 'Tester', false);
+let wolverine = new Mutant('Logan', 'Project Manager', true);
+
+scarletWitch.getHero();
+wolverine.getMutant();
 ```
 
 </CodeSurfer>
@@ -365,12 +438,49 @@ function
 
 ---
 
-#### Several Types Example
-
 <CodeSurfer>
 
-```js
-function
+```ts title="Several Types Example"
+class MutantX {
+  constructor(
+    public secretName: string,
+    public superPowers: string | Array<string>,
+    protected isMutant: boolean,
+  ) { }
+
+  public listOfSuperPowers(): string | Array<string> {
+    return this.superPowers;
+  }
+
+}
+
+```
+
+```diff 4
+```
+
+```diff 8
+```
+
+
+```ts title="Several Types Example"
+class MutantX {
+  constructor(
+    public secretName: string,
+    public superPowers: string | Array<string>,
+    protected isMutant: boolean,
+  ) { }
+
+  public listOfSuperPowers(): string | Array<string> {
+    return this.superPowers;
+  }
+
+}
+
+let professorX = new MutantX('Kereki', ['Programmer', 'Guru', 'Powerful psychic abilities'], true);
+let mystique = new MutantX('Raven', 'Transformation', true);
+professorX.listOfSuperPowers(); // ['Programmer', 'Guru', 'Powerful psychic abilities']
+mystique.listOfSuperPowers(); // 'Transformation'
 ```
 
 </CodeSurfer>
@@ -394,19 +504,44 @@ function
 
 ---
 
-### Combine Example
-
 <CodeSurfer>
 
-```typescript
+```ts title="Combine Example" 
+interface Employee {
+  work: () => string;
+}
 
+interface Manager {
+  manage: () => string;
+}
+```
+
+```ts title="Combine Example" 
+interface Employee {
+  work: () => string;
+}
+
+interface Manager {
+  manage: () => string;
+}
+
+type Supervisor = Employee & Manager;
+
+// john can both work and manage
+let john: Supervisor;
+```
+
+```diff 9
+```
+
+```diff 12
 ```
 
 </CodeSurfer>
 
 ---
 
-<Question question="No crean nuevos tipos, sino que crean nuevos nombres que se refieren a ese tipo.">
+<Question question="Es util para no crean nuevos tipos, podemos nuevos nombres que se refieren a ese tipo y dar la funcionalidad que deseamos">
   <Answer>
     let value: alphanumeric;
   </Answer>
@@ -423,14 +558,25 @@ function
 
 ---
 
-#### Type Mapping Example
 
 <CodeSurfer>
 
-```typescript
+```ts title="Type Mapping Example" 
 type alphanumeric = string | number;
-let value: alphanumeric = "";
-value = 10;
+
+let documentId: alphanumeric;
+documentId = 1232454356;
+let passport: alphanumeric = "";
+passport = "BC12353412AWR";
+```
+
+```diff 1
+```
+
+```diff 4
+```
+
+```diff 6
 ```
 
 </CodeSurfer>
