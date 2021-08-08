@@ -34,6 +34,278 @@ You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](h
 
 <Question question={
   <span>
+    Sin mí no podrías ejecutar algo de lógica antes del método
+    original
+  </span>
+}>
+  <Answer>
+    <span>Ctrl + C, Ctrl + V</span>
+  </Answer>
+  <Answer>
+    <span>Decorador</span>
+  </Answer>
+  <Answer>
+    <span>Una partida de Warzone</span>
+  </Answer>
+  <Answer>
+    <span>Un <i>if</i></span>
+  </Answer>
+</Question>
+
+---
+
+<CodeSurfer>
+
+```ts title="Decorator example"
+class FancyComponent {
+  deleteUserFromDb(userId: string): void {
+    // Delete the user 
+  }
+}
+```
+
+```ts title="Decorator example"
+class FancyComponent {
+  deleteUserFromDb(userId: string): void {
+    // Delete the user 
+  }
+}
+
+function AreYouSure(prompt: string) {
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    let originalMethod = descriptor.value;
+
+    descriptor.value = function (...args: any[]) {
+      const confirmation = confirm(prompt);
+
+      if (confirmation) {
+        let result = originalMethod.apply(this, args);
+        return result;
+      }
+    }
+  }
+}
+```
+
+```diff 8:23
+```
+
+```diff 7
+```
+
+```diff 7[21:34],16[36:41]
+```
+
+```diff 13
+```
+
+```diff 15
+```
+
+```diff 16
+```
+
+```diff 18[11:22]
+```
+
+```diff 19:20
+```
+
+```ts title="Decorator example"
+class FancyComponent {
+  deleteUserFromDb(userId: string): void {
+    // Delete the user 
+  }
+}
+```
+
+```ts title="Decorator example"
+class FancyComponent {
+  @AreYouSure('This action cannot be rolled back')
+  deleteUserFromDb(userId: string): void {
+    // Delete the user 
+  }
+}
+```
+
+</CodeSurfer>
+
+---
+
+<Question question={
+  <span>
+    Me solían llamar operador diamante, pero soy más que eso, y soy el único que
+    nunca te juzgará por generalizar
+  </span>
+}>
+  <Answer>
+    <span>Tipo de variable <i>any</i></span>
+  </Answer>
+  <Answer>
+    <span>Tipo de variable <i>unknown</i></span>
+  </Answer>
+  <Answer>
+    <span>Tipo de variable <i>T</i></span>
+  </Answer>
+  <Answer>
+    <span>Todos los Web UI son iguales 🙄</span>
+  </Answer>
+</Question>
+
+---
+
+<CodeSurfer>
+
+```ts title="Generics Example"
+type HTTPResponse = {
+  status: number;
+  body: any;
+  url: string;
+  headers: { [key: string]: string };
+}
+```
+
+```ts title="Generics Example"
+type HTTPResponse = {
+  status: number;
+  body: any;
+  url: string;
+  headers: { [key: string]: string };
+}
+
+const response: HTTPResponse = {
+  body: { user: 'Julian', id: 1 },
+  headers: { Auth: 'jwt' },
+  status: 200,
+  url: 'http://api.com/fixTheBug'
+};
+```
+
+```diff 3[9:11],9[9:33]
+```
+
+```ts title="Generics Example"
+type HTTPResponse = {
+  status: number;
+  body: any;
+  url: string;
+  headers: { [key: string]: string };
+}
+
+const response: HTTPResponse = {
+  body: { user: 'Julian', id: 1 },
+  headers: { Auth: 'jwt' },
+  status: 200,
+  url: 'http://api.com/fixTheBug'
+};
+
+response.body.notAProp; // ☠️
+```
+
+```ts title="Generics Example"
+type HTTPResponse<T> = {
+  status: number;
+  body: T;
+  url: string;
+  headers: { [key: string]: string };
+}
+```
+
+```ts title="Generics Example"
+type HTTPResponse<T> = {
+  status: number;
+  body: T;
+  url: string;
+  headers: { [key: string]: string };
+}
+
+const genericResponse: GenericHTTPResponse<{
+  user: string,
+  id: number,
+}> = {
+  body: { user: 'Julian', id: 1 },
+  headers: { Auth: 'jwt' },
+  status: 200,
+  url: 'http://api.com/fixTheBug'
+};
+```
+
+```diff 8[44],9:10,11[1],12[9:33]
+```
+
+```ts title="Generics Example"
+type HTTPResponse<T> = {
+  status: number;
+  body: T;
+  url: string;
+  headers: { [key: string]: string };
+}
+
+const genericResponse: GenericHTTPResponse<{
+  user: string,
+  id: number,
+}> = {
+  body: { user: 'Julian', id: 1 },
+  headers: { Auth: 'jwt' },
+  status: 200,
+  url: 'http://api.com/fixTheBug'
+};
+
+// TS complains 💥
+genericResponse.body.notAProp;
+```
+
+```ts title="Generics Example"
+type ConstrainedHTTPResponse<T extends object> = {
+  status: number;
+  body: T;
+  url: string;
+  headers: { [key: string]: string };
+}
+```
+
+```diff 1[32:45]
+```
+
+```ts title="Generics Example"
+type ConstrainedHTTPResponse<T extends object> = {
+  status: number;
+  body: T;
+  url: string;
+  headers: { [key: string]: string };
+}
+
+// Type 'string' does not satisfy the constraint 'object'.
+const constrainedResponse: ConstrainedHTTPResponse<string> = {
+  body: '',
+  headers: { Auth: 'jwt' },
+  status: 200,
+  url: 'http://api.com/fixTheBug'
+};
+```
+
+```diff 8,9[52:57]
+```
+
+```ts title="Generics Example"
+type MappedHTTPResponse<T extends object, K = Partial<T>> = {
+  status: number;
+  body: K;
+  url: string;
+  headers: { [key: string]: string };
+}
+```
+
+</CodeSurfer>
+
+---
+
+<Question question={
+  <span>
     Si grazna como un pato, camina como un pato y se comporta como un pato, entonces
     es un <i>string</i>
   </span>
