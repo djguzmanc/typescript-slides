@@ -11,7 +11,9 @@ import WildcardSet from './components/WildcardSet/WildcardSet';
 import { 
   pluckError,
   pluckSuggestion,
-  neverError
+  neverError,
+  asConstError,
+  guardSuggestion
 } from './assets/images/ts-intellisense/index';
 
 export const theme = vsDark;
@@ -30,20 +32,416 @@ You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](h
 
 ---
 
-<Question question="Es Typescript hermoso">
+<Question question={
+  <span>
+    Si grazna como un pato, camina como un pato y se comporta como un pato, entonces
+    es un <i>string</i>
+  </span>
+}>
   <Answer>
-    Sí
+    if (obj === 🦆) {'{'}<br />
+      &nbsp;&nbsp;// Quack!<br />
+    }
   </Answer>
   <Answer>
-    No
+    if (obj is 🦆) {'{'}<br />
+      &nbsp;&nbsp;// Quack!<br />
+    }
   </Answer>
   <Answer>
-    Tal vez
+    if (obj instanceof 🦆) {'{'}<br />
+      &nbsp;&nbsp;// Quack!<br />
+    }
   </Answer>
   <Answer>
-    Me cago en todo
+    <span style={{ fontSize: '30px' }}>
+      function (obj: unknown): obj is 🦆 {'{'}<br />
+        &nbsp;&nbsp;if (obj.quack) return true;<br />
+      }<br /><br />
+      
+      function assert(obj: unknown): asserts obj is 🦆 {'{'}<br />
+        &nbsp;&nbsp;if (!obj.quack) throw new Error("Not a 🦆");<br />
+      }
+    </span>
   </Answer>
 </Question>
+
+---
+
+<CodeSurfer>
+
+```ts title="Type guard example"
+// ezpz 🍋 squeezy
+
+function someFn(param: string | number) {
+  if (typeof param === 'string') {
+    param.toLocaleLowerCase();
+  } else {
+    param.toExponential();
+  }
+}
+```
+
+```diff 4[7:31]
+```
+
+```diff 5[11:29]
+```
+
+```diff 7[11:25]
+```
+
+```ts title="Type guard example"
+type Animal = {
+  name: string;
+  isDomestic: boolean;
+}
+
+type Vehicle = {
+  wheels: number;
+  isAutomatic: boolean;
+}
+```
+
+```ts title="Type guard example"
+type Animal = {
+  name: string;
+  isDomestic: boolean;
+}
+
+type Vehicle = {
+  wheels: number;
+  isAutomatic: boolean;
+}
+
+function pleaseMergeThis(param: unknown) {
+  if (isAnimal(param)) {
+    console.log(param.isDomestic);
+  } else if (isVehicle(param)) {
+    console.log(param.isAutomatic);
+  }
+}
+```
+
+```diff 12[7:21],14[14:29]
+```
+
+```ts title="Type guard example"
+function isAnimal(obj: unknown): obj is Animal {
+  if ((obj as object).hasOwnProperty('name')) return true;
+  return false;
+}
+
+function isVehicle(obj: unknown): obj is Vehicle {
+  if ((obj as object).hasOwnProperty('wheels')) return true;
+  return false;
+}
+```
+
+```diff 1[34:46],6[35:48]
+```
+
+```diff
+```
+
+```ts title="Type guard example"
+function pleaseMergeThis(param: unknown) {
+  if (isAnimal(param)) {
+    console.log(param.isDomestic);
+  } else if (isVehicle(param)) {
+    console.log(param.isAutomatic);
+  }
+}
+```
+
+```diff 1[26:39]
+```
+
+```diff 3[17:32],5[17:33]
+```
+
+```ts title="Type guard example"
+// Don't you like the ifs? 😑
+```
+
+```ts title="Type guard example"
+// Don't you like the ifs? 😑
+function onLineGuard(obj: unknown): asserts obj is Vehicle {
+  if (!(obj as object).hasOwnProperty('wheels'))
+    throw new Error("Not a Vehicle!");
+}
+```
+
+```ts title="Type guard example"
+// Don't you like the ifs? 😑
+function onLineGuard(obj: unknown): asserts obj is Vehicle {
+  if (!(obj as object).hasOwnProperty('wheels'))
+    throw new Error("Not a Vehicle!");
+}
+
+function someFn3(param: unknown) {
+  onLineGuard(param);
+  console.log(param.isAutomatic);
+}
+```
+
+```diff 2[37:58],4,8
+```
+
+</CodeSurfer>
+
+---
+
+### Type guard Suggestion
+
+<img src={guardSuggestion} />
+
+---
+
+<Question question={
+  <span>
+    Si no existieran librerías como <i>Immutable.js</i>, yo sería tu
+    única opción
+  </span>
+}>
+  <Answer>
+    const obj: readonly = {'{'}<br />
+      &nbsp;&nbsp;hello: 'world'<br />
+    };
+  </Answer>
+  <Answer>
+    const readonly obj = {'{'}<br />
+      &nbsp;&nbsp;hello: 'world'<br />
+    };
+  </Answer>
+  <Answer>
+    const obj = {'{'}<br />
+      &nbsp;&nbsp;hello: 'world'<br />
+    } as const;
+  </Answer>
+  <Answer>
+    const obj = {'{'}<br />
+      &nbsp;&nbsp;hello: 'world'<br />
+    };<br />
+    
+    Typescript.freeze(obj);
+  </Answer>
+</Question>
+
+---
+
+<CodeSurfer>
+
+```ts title="as const Example"
+const anObjectThatNobodyShouldModify = {
+  transactionAmount: 1200, // 🤑
+  isApproved: true,
+  to: {
+    name: 'Mauricio',
+    id: '😛'
+  }
+};
+```
+
+```ts title="as const Example"
+const anObjectThatNobodyShouldModify = {
+  transactionAmount: 1200, // 🤑
+  isApproved: true,
+  to: {
+    name: 'Mauricio',
+    id: '😛'
+  }
+};
+
+// Is allowed to modify the id 
+anObjectThatNobodyShouldModify.to.id = '💀';
+```
+
+```ts title="as const Example"
+const anObjectThatNobodyShouldModify = {
+  transactionAmount: 1200, // 🤑
+  isApproved: true,
+  to: {
+    name: 'Mauricio',
+    id: '😛'
+  }
+} as const;
+
+// Typescript complains! 🤩
+anObjectThatNobodyShouldModify.to.id = '💀';
+```
+
+```ts title="as const Example"
+const anObjectThatNobodyShouldModify = {
+  transactionAmount: 1200, // 🤑
+  isApproved: true,
+  to: {
+    name: 'Mauricio',
+    id: '😛'
+  }
+} as const;
+
+// Typescript complains! 🤩
+anObjectThatNobodyShouldModify.to.id = '💀';
+
+// Typescript 0 - Immutable.js 1 😔
+(anObjectThatNobodyShouldModify as any).to.id = '💀';
+```
+
+</CodeSurfer>
+
+---
+
+### Error
+<img src={asConstError} />
+
+---
+
+<Question question={
+  <span>
+    Podría marcar la propiedad <i>count</i> como solo lectura y avisarte si
+    alguien se atreve a profanarla
+  </span>
+}>
+  <Answer>
+    interface MyInterface {'{'}<br />
+      &nbsp;&nbsp;niLoPienses count: number;<br />
+    }
+  </Answer>
+  <Answer>
+    interface MyInterface {'{'}<br />
+      &nbsp;&nbsp;onlyread count: number;<br />
+    }
+  </Answer>
+  <Answer>
+    interface MyInterface {'{'}<br />
+      &nbsp;&nbsp;F count: number;<br />
+    }
+  </Answer>
+  <Answer>
+    interface MyInterface {'{'}<br />
+      &nbsp;&nbsp;readonly count: number;<br />
+    }
+  </Answer>
+</Question>
+
+---
+
+<Question question={
+  <span>
+    No conoces el tipo de un genérico, y yo podría ser
+    útil para averiguarlo...
+  </span>
+}>
+  <Answer>
+    typeof
+  </Answer>
+  <Answer>
+    instanceof
+  </Answer>
+  <Answer>
+    infer
+  </Answer>
+  <Answer>
+    F
+  </Answer>
+</Question>
+
+---
+
+<CodeSurfer>
+
+```ts title="infer Example"
+const data = ['hello', 12, { world: null }];
+```
+
+```ts title="infer Example"
+const data = ['hello', 12, { world: null }];
+typeof data; // (string | number | { world: null })[]
+```
+
+```ts title="infer Example"
+const data = ['hello', 12, { world: null }];
+typeof data; // (string | number | { world: null })[]
+const valueWithType: string | number | { world: null } = data[0];
+```
+
+```diff 2[18:50],3[22:55]
+```
+
+```ts title="infer Example"
+const data = ['hello', 12, { world: null }];
+typeof data; // (string | number | { world: null })[]
+const valueWithType: string | number | { world: null } = data[0];
+
+typeof data[0]; 
+// Please don't 🤢
+```
+
+```ts title="infer Example"
+const data = ['hello', 12, { world: null }];
+typeof data; // (string | number | { world: null })[]
+const valueWithType: string | number | { world: null } = data[0];
+
+typeof data[0]; 
+// Please don't 🤢
+
+type FlattenArray<T> = T extends Array<infer R> ? R : T;
+```
+
+```diff 8[18:20]
+```
+
+```diff 8[24:48]
+```
+
+```diff 8[51]
+```
+
+```diff 8[55]
+```
+
+```ts title="infer Example"
+const data = ['hello', 12, { world: null }];
+typeof data; // (string | number | { world: null })[]
+const valueWithType: string | number | { world: null } = data[0];
+
+typeof data[0]; 
+// Please don't 🤢
+
+type FlattenArray<T> = T extends Array<infer R> ? R : T;
+
+const array = ['hello', 3];
+const innerValue: FlattenArray<typeof array> = array[0];
+// string | number
+```
+
+```diff 11[32:43]
+```
+
+```ts title="infer Example"
+const data = ['hello', 12, { world: null }];
+typeof data; // (string | number | { world: null })[]
+const valueWithType: string | number | { world: null } = data[0];
+
+typeof data[0]; 
+// Please don't 🤢
+
+type FlattenArray<T> = T extends Array<infer R> ? R : T;
+
+const array = ['hello', 3];
+const innerValue: FlattenArray<typeof array> = array[0];
+// string | number
+
+const data = ['hello', 12, { world: null }];
+const value2: FlattenArray<typeof data> = array[0];
+// string | number | { world: null }
+```
+
+```diff
+```
+
+</CodeSurfer>
 
 ---
 

@@ -1,16 +1,11 @@
 // What if you want to turn every object property 
 // into some custom types, like, making every property
 // nullable...
-
 type Warrior = {
   strength: number;
   name: string;
   suitColor: string;
 };
-
-type FlattenArray<T> = T extends Array<infer R> ? R : T;
-const array = ['hello', 3];
-const innerValue: FlattenArray<typeof array> = array[0];
 
 /**
  * If your tsconfig file is set to strict null checks,
