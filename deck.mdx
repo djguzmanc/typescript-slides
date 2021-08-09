@@ -14,7 +14,8 @@ import {
   pluckSuggestion,
   neverError,
   asConstError,
-  guardSuggestion
+  guardSuggestion,
+  optionalError
 } from './assets/images/ts-intellisense/index';
 
 export const theme = vsDark;
@@ -29,31 +30,78 @@ You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](h
 
 ---
 
-<WildcardSet>
-  <Wildcard type="PHONE" used />
-  <Wildcard type="PUBLIC" selected />
-  <Wildcard type="FIFTY" />
-</WildcardSet>
+<Question question="¿Quién fue el creador de Typescript y a qué empresa pertenece?">
+  <Answer>
+    Anders Hejlsberg en Microsoft.
+  </Answer>
+  <Answer>
+    Linus Torvalds en Linux Foundation
+  </Answer>
+  <Answer>
+    Brendan Eich en Mozilla Corporation's
+  </Answer>
+  <Answer>
+    James Arthur Gosling en Sun Microsystems
+  </Answer>
+</Question>
+
+---
+
+<Question question="¿Es typescript compilado o interpretado?">
+  <Answer>
+    Compilado, los navegadores de hoy en día tienen la capacidad de 
+    interpretar archivos .TS
+  </Answer>
+  <Answer>
+    Interpretado, todo el código es transpilado a .JS, pero 
+    también existe la posibilidad de ser interpretado por los 
+    navegadores actuales.
+  </Answer>
+  <Answer>
+    Interpretado, porque los archivos de .TS no son entendidos 
+    por el navegador y se genera código JS.
+  </Answer>
+  <Answer>
+    Compilado, TS es capaz de generar un archivo binario. 
+  </Answer>
+</Question>
 
 ---
 
 <Question question={
   <span>
-    Sin mí no podrías ejecutar algo de lógica antes del método
-    original
+    Cuando deseas que <i>typescript</i> se comporte como <i>javascript</i>,
+    permitiendo que cualquier variable sea cualquier cosa se usa el tipo
   </span>
 }>
   <Answer>
-    <span>Ctrl + C, Ctrl + V</span>
+    void
   </Answer>
   <Answer>
-    <span>Decorador</span>
+    any
   </Answer>
   <Answer>
-    <span>Una partida de Warzone</span>
+    var
   </Answer>
   <Answer>
-    <span>Un <i>if</i></span>
+    unknown
+  </Answer>
+</Question>
+
+---
+
+<Question question="Nadie me conoce realmente. La gente piensa que me conoce.">
+  <Answer>
+    Cobol
+  </Answer>
+  <Answer>
+    Angular
+  </Answer>
+  <Answer>
+    Unknown
+  </Answer>
+  <Answer>
+    PHP
   </Answer>
 </Question>
 
@@ -61,83 +109,748 @@ You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](h
 
 <CodeSurfer>
 
-```ts title="Decorator example"
-class FancyComponent {
-  deleteUserFromDb(userId: string): void {
-    // Delete the user 
-  }
+```ts title="Unknown Example" 
+let newVariable: unknown;
+if (typeof newVariable === 'string') {
+  newVariable.toLowerCase(); 
 }
 ```
 
-```ts title="Decorator example"
-class FancyComponent {
-  deleteUserFromDb(userId: string): void {
-    // Delete the user 
-  }
+```diff 1[18:24]
+```
+
+```diff 2[5:35]
+```
+
+```diff 3[15:27]
+```
+
+</CodeSurfer>
+
+---
+
+<Question question="Ni Chuck Norris pudo evitar cumplir con este contrato">
+  <Answer>
+    <span>
+      class Vehicle <i>implements</i> IVehicle
+    </span>
+  </Answer>
+  <Answer>
+    <span>
+      class Vehicle <i>extends</i> IVehicle
+    </span>
+  </Answer>
+  <Answer>
+    <span style={{ fontSize: '40px' }}>
+      class Globant <i>extends</i> ICompraDeAcciones
+    </span>
+  </Answer>
+  <Answer>
+    Matrimonio
+  </Answer>
+</Question>
+
+---
+
+<CodeSurfer>
+
+```ts title="Interface Example"
+interface IVehicle {
+  wheels: number;
+  isAutomatic: boolean;
+}
+```
+
+```ts title="Interface Example"
+interface IVehicle {
+  wheels: number;
+  isAutomatic: boolean;
 }
 
-function AreYouSure(prompt: string) {
-  return function (
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
-    let originalMethod = descriptor.value;
+class Car implements IVehicle {
+  constructor(
+    public wheels: number,
+    public isAutomatic: boolean,
+  ) {}
+}
+```
 
-    descriptor.value = function (...args: any[]) {
-      const confirmation = confirm(prompt);
+```ts title="Interface Example"
+interface IVehicle {
+  wheels: number;
+  isAutomatic: boolean;
+}
 
-      if (confirmation) {
-        let result = originalMethod.apply(this, args);
-        return result;
-      }
+class Car implements IVehicle {
+  constructor(
+    public wheels: number,
+    public isAutomatic: boolean,
+  ) {}
+}
+
+const vehicle: IVehicle = {
+  wheels: 4,
+  isAutomatic: false,
+};
+```
+
+</CodeSurfer>
+
+---
+
+<Question question="Si es un parámetro o propiedad opcional, ¿Cuál es la sintaxis correcta para ello?">
+  <Answer>
+    function foo(param: Optional{'<'}string>) {'{'}}
+  </Answer>
+  <Answer>
+    interface IAnimal {'{'}<br />
+      &nbsp;&nbsp;name: string?;<br />
     }
-  }
+  </Answer>
+  <Answer>
+    interface IAnimal {'{'}<br />
+      &nbsp;&nbsp;name: optional;<br />
+    }
+  </Answer>
+  <Answer>
+    interface IAnimal {'{'}<br />
+      &nbsp;&nbsp;name?: string;<br />
+    }
+  </Answer>
+</Question>
+
+---
+
+<CodeSurfer>
+
+```ts title="Optional Paramater Example"
+interface IHero 🦸{
+  secretName: string;
+  superPower: string;
+  superAge?: number;
 }
 ```
 
-```diff 8:23
+```diff 1[11:18]
+```
+
+```diff 4
+```
+
+```ts title="Optional Paramater Example"
+interface IHero 🦸{
+  secretName: string;
+  superPower: string;
+  superAge?: number;
+}
+
+class Marvel implements IHero 🦸{ }
+```
+
+```diff 7[7:32]
+```
+
+```ts title="Optional Paramater Example"
+interface IHero 🦸{
+  secretName: string;
+  superPower: string;
+  superAge?: number;
+}
+
+class Marvel implements IHero 🦸{
+  constructor(
+    public secretName: string, 
+    public superPower: string
+    ) { }
+  
+  public getSuperHero(): void {
+    console.log(`
+      The name is ${this.secretName} and 
+      his/her superpower is ${this.superPower}
+    `.trim());
+  }
+}
+
+let wonderWoman = new Marvel('Diana', 'Programmer');
+wonderWoman.getSuperHero();
+// Result
+🦸‍♀️
+// The super secret name is Diana and his/her 
+// superpower is Programmer
+```
+
+</CodeSurfer>
+
+---
+
+### Warning Implementation
+<img src={optionalError} />
+
+---
+
+<Question question="¿De que forma se puede realizar casting en TS?">
+  <Answer>
+    d = new Vehicle(); <br />
+    b: Car = d;
+  </Answer>
+  <Answer>
+    <span style={{ fontSize: '30px' }}>
+      let enteredText = (input as HTMLInputElement).value;
+    </span>
+  </Answer>
+  <Answer>
+    x = number(1)
+  </Answer>
+  <Answer>
+    myNumber = (number) myNumber;
+  </Answer>
+</Question>
+
+---
+
+<Question question={
+  <span>
+    Si no existieran librerías como <i>Immutable.js</i>, yo sería tu
+    única opción
+  </span>
+}>
+  <Answer>
+    const obj: readonly = {'{'}<br />
+      &nbsp;&nbsp;hello: 'world'<br />
+    };
+  </Answer>
+  <Answer>
+    const readonly obj = {'{'}<br />
+      &nbsp;&nbsp;hello: 'world'<br />
+    };
+  </Answer>
+  <Answer>
+    const obj = {'{'}<br />
+      &nbsp;&nbsp;hello: 'world'<br />
+    } as const;
+  </Answer>
+  <Answer>
+    const obj = {'{'}<br />
+      &nbsp;&nbsp;hello: 'world'<br />
+    };<br />
+    
+    Typescript.freeze(obj);
+  </Answer>
+</Question>
+
+---
+
+<CodeSurfer>
+
+```ts title="as const Example"
+const anObjectThatNobodyShouldModify = {
+  transactionAmount: 1200, // 🤑
+  isApproved: true,
+  to: {
+    name: 'Mauricio',
+    id: '😛'
+  }
+};
+```
+
+```ts title="as const Example"
+const anObjectThatNobodyShouldModify = {
+  transactionAmount: 1200, // 🤑
+  isApproved: true,
+  to: {
+    name: 'Mauricio',
+    id: '😛'
+  }
+};
+
+// Is allowed to modify the id 
+anObjectThatNobodyShouldModify.to.id = '💀';
+```
+
+```ts title="as const Example"
+const anObjectThatNobodyShouldModify = {
+  transactionAmount: 1200, // 🤑
+  isApproved: true,
+  to: {
+    name: 'Mauricio',
+    id: '😛'
+  }
+} as const;
+
+// Typescript complains! 🤩
+anObjectThatNobodyShouldModify.to.id = '💀';
+```
+
+```ts title="as const Example"
+const anObjectThatNobodyShouldModify = {
+  transactionAmount: 1200, // 🤑
+  isApproved: true,
+  to: {
+    name: 'Mauricio',
+    id: '😛'
+  }
+} as const;
+
+// Typescript complains! 🤩
+anObjectThatNobodyShouldModify.to.id = '💀';
+
+// Typescript 0 - Immutable.js 1 😔
+(anObjectThatNobodyShouldModify as any).to.id = '💀';
+```
+
+</CodeSurfer>
+
+---
+
+### Error
+<img src={asConstError} />
+
+---
+
+<Question question={
+  <span>
+    Podría marcar la propiedad <i>count</i> como solo lectura y avisarte si
+    alguien se atreve a profanarla
+  </span>
+}>
+  <Answer>
+    interface MyInterface {'{'}<br />
+      &nbsp;&nbsp;niLoPienses count: number;<br />
+    }
+  </Answer>
+  <Answer>
+    interface MyInterface {'{'}<br />
+      &nbsp;&nbsp;onlyread count: number;<br />
+    }
+  </Answer>
+  <Answer>
+    interface MyInterface {'{'}<br />
+      &nbsp;&nbsp;F count: number;<br />
+    }
+  </Answer>
+  <Answer>
+    interface MyInterface {'{'}<br />
+      &nbsp;&nbsp;readonly count: number;<br />
+    }
+  </Answer>
+</Question>
+
+---
+
+<Question question={
+  <span>
+    TypeScript proporciona tres palabras reservadas para controlar 
+    la visibilidad de los miembros de la clase, como propiedades o métodos.
+  </span>
+}>
+  <Answer>
+    Esto no existe en Javascript
+  </Answer>
+  <Answer>
+    Se puede lograr pero 😴
+  </Answer>
+  <Answer>
+    Es la D al lado
+  </Answer>
+  <Answer>
+    public, protected, private
+  </Answer>
+</Question>
+
+---
+
+
+<CodeSurfer>
+
+```ts title="POO Example"
+class Hero 🦸{
+  constructor(
+    public secretName: string,
+    private _superPower: string,
+    protected isMutant: boolean,
+  ) { }
+
+  public getHero(): void {
+    console.log(`${this.secretName} and ${this._superPower}`);
+  }
+
+  private getSuperPower(): void {
+    console.log(`${this._superPower}`);
+  }
+
+  protected verifyHero(): string {
+    return this.isMutant ? "Es mutante" : "Heroe de sangre pura";
+  }
+
+}
+```
+
+``` diff 3
+``` 
+
+``` diff 4
+``` 
+
+``` diff 5
+``` 
+
+``` diff 8
+``` 
+
+``` diff 12
+``` 
+
+``` diff 16
+``` 
+
+```ts title="POO Example"
+ class Mutant extends Hero {
+  constructor(
+    secretName: string,
+    superPower: string,
+    isMutant: boolean
+  ) {
+    super(secretName, superPower, isMutant);
+  }
+
+  getMutant(): void {
+    this.getHero();
+    console.log(this.verifyHero());
+  }
+}
 ```
 
 ```diff 7
 ```
 
-```diff 7[21:34],16[36:41]
+```diff 10
 ```
 
-```diff 13
+```diff 11
 ```
 
-```diff 15
+```diff 12
 ```
 
-```diff 16
+</CodeSurfer>
+
+---
+
+<Question question=" Es una forma sencilla de dar nombres más descriptivos a valores constantes numéricos.">
+  <Answer>
+    Types
+  </Answer>
+  <Answer>
+    Classes
+  </Answer>
+  <Answer>
+    Enums
+  </Answer>
+  <Answer>
+    Objects
+  </Answer>
+</Question>
+
+---
+
+
+<CodeSurfer>
+
+```ts title="Enums Example"
+enum PrintMedia📰{
+  Newspaper = 'NEWSPAPER',
+  Newsletter = 'NEWSLETTER',
+  Magazine = 'MAGAZINE',
+  Book = 'BOOK'
+}
 ```
 
-```diff 18[11:22]
+``` diff 1
 ```
 
-```diff 19:20
+```ts title="Enums Example"
+enum PrintMedia📰{
+  Newspaper = 'NEWSPAPER',
+  Newsletter = 'NEWSLETTER',
+  Magazine = 'MAGAZINE',
+  Book = 'BOOK'
+}
+
+function getPrintMediaCode(mediaName: string): string {
+  if (mediaName === PrintMedia.Book ) {
+      return `You have selected a ${PrintMedia.Book}`
+  }
+  return PrintMedia.Newspaper;
+}
 ```
 
-```ts title="Decorator example"
-class FancyComponent {
-  deleteUserFromDb(userId: string): void {
-    // Delete the user 
+```diff 9[21:36]
+```
+
+```diff 10[34:53]
+```
+
+```diff 12[10:31]
+```
+
+</CodeSurfer>
+
+---
+
+<Question question={
+  <span>
+    Permiten combinar los miembros de dos o más tipos mediante este operador. 
+    Esto le permite combinar tipos existentes para obtener un solo tipo con 
+    todas las funciones que necesita.
+  </span>  
+}>
+  <Answer>
+    <span style={{ fontSize: '30px' }}>
+      type NewType = Combine{'<'}TypeA, TypeB>
+    </span>
+  </Answer>
+  <Answer>
+    <span style={{ fontSize: '30px' }}>
+      type NewType = Merge{'<'}TypeA, TypeB>
+    </span>
+  </Answer>
+  <Answer>
+    <span>
+      type NewType = TypeA & TypeB
+    </span>
+  </Answer>
+  <Answer>
+    <span>
+      type NewType = TypeA + TypeB
+    </span>
+  </Answer>
+</Question>
+
+---
+
+<CodeSurfer>
+
+```ts title="Combine Example" 
+interface Employee {
+  work: () => string;
+}
+
+interface Manager {
+  manage: () => string;
+}
+```
+
+```ts title="Combine Example" 
+interface Employee {
+  work: () => string;
+}
+
+interface Manager {
+  manage: () => string;
+}
+
+type Supervisor = Employee & Manager;
+
+// John can both work and manage
+let john: Supervisor;
+```
+
+```diff 9
+```
+
+```diff 12
+```
+
+</CodeSurfer>
+
+---
+
+<Question question="Es una construcción especial en TypeScript que indica que un valor puede ser de varios tipos.">
+  <Answer>
+    let value: string | number = "Foo";
+  </Answer>
+  <Answer>
+    let value: string || number = "Foo";
+  </Answer>
+  <Answer>
+    let value: string && number = "Foo";
+  </Answer>
+  <Answer>
+    let value: string and number = "Foo";
+  </Answer>
+</Question>
+
+---
+
+<CodeSurfer>
+
+```ts title="Several Types Example"
+class MutantX {
+  constructor(
+    public secretName: string,
+    public superPowers: string | Array<string>,
+    protected isMutant: boolean,
+  ) { }
+
+  public listOfSuperPowers(): string | Array<string> {
+    return this.superPowers;
+  }
+
+}
+
+```
+
+```diff 4
+```
+
+```diff 8
+```
+
+
+```ts title="Several Types Example"
+class MutantX {
+  constructor(
+    public secretName: string,
+    public superPowers: string | Array<string>,
+    protected isMutant: boolean,
+  ) { }
+
+  public listOfSuperPowers(): string | Array<string> {
+    return this.superPowers;
+  }
+
+}
+
+let professorX = new MutantX('Kereki', [
+  'Programmer', 
+  'Guru', 
+  'Powerful psychic abilities'
+], true);
+
+let mystique = new MutantX('Raven', 'Transformation', true);
+professorX.listOfSuperPowers(); 
+// ['Programmer', 'Guru', 'Powerful psychic abilities']
+mystique.listOfSuperPowers(); 
+// 'Transformation'
+```
+
+</CodeSurfer>
+
+---
+
+<Question question={
+  <span>¿Qué significa la palabra reservada <i>never</i>?</span>
+}>
+  <Answer>
+    Permite que las propiedades de un objeto 
+    acepten null o undefined a la vez.
+  </Answer>
+  <Answer>
+    Es un tipo de variable indicando que ésta nunca tendrá valor.
+  </Answer>
+  <Answer>
+    Se usa en generics para que un tipo genérico esté restringido
+    a ciertos tipos de variable.
+  </Answer>
+  <Answer>
+    Se usa para que la aplicación&nbsp;<i>never</i>&nbsp;falle.
+  </Answer>
+</Question>
+
+---
+
+<CodeSurfer>
+
+```ts title="never Example"
+type Person = {
+  role: 'ADMIN' | 'PLAYER' | 'CLIENT',
+}
+```
+
+```ts title="never Example"
+type Person = {
+  role: 'ADMIN' | 'PLAYER' | 'CLIENT',
+}
+
+const doSomething = (person: Person) => {
+  switch (person.role) {
+    case 'ADMIN':
+      break;
+    case 'PLAYER':
+      break;
   }
 }
 ```
 
-```ts title="Decorator example"
-class FancyComponent {
-  @AreYouSure('This action cannot be rolled back')
-  deleteUserFromDb(userId: string): void {
-    // Delete the user 
+```ts title="never Example"
+type Person = {
+  role: 'ADMIN' | 'PLAYER' | 'CLIENT',
+}
+
+const doSomething = (person: Person) => {
+  switch (person.role) {
+    case 'ADMIN':
+      break;
+    case 'PLAYER':
+      break;
+    default:
+      // Error here 🥳!
+      const a: never = person.role;
+  }
+}
+```
+
+```diff 5:16
+```
+
+```ts title="never Example"
+type Person = {
+  role: 'ADMIN' | 'PLAYER' | 'CLIENT',
+}
+
+const doSomething = (person: Person) => {
+  switch (person.role) {
+    case 'ADMIN':
+      break;
+    case 'PLAYER':
+      break;
+    case 'CLIENT':
+      break;
+    default:
+      // Error here 🥳!
+      const a: never = person.role;
+  }
+}
+```
+
+```diff 5:17
+```
+
+```ts title="never Example"
+const ups = (a: never): never => {
+  throw new Error("Didn't expect to reach here 😨");
+}
+
+const doSomethingSafer = (person: Person) => {
+  switch (person.role) {
+    case 'ADMIN':
+      break;
+    case 'PLAYER':
+      break;
+    case 'CLIENT':
+      break;
+    default:
+      ups(person.role);
   }
 }
 ```
 
 </CodeSurfer>
+
+---
+
+### Error
+<img src={neverError} />
 
 ---
 
@@ -303,6 +1016,229 @@ type MappedHTTPResponse<T extends object, K = Partial<T>> = {
   url: string;
   headers: { [key: string]: string };
 }
+```
+
+</CodeSurfer>
+
+---
+
+<Question question={<span>¿Para que sirve el operador <i>keyof</i>?</span>}>
+  <Answer>
+    Retorna true si la llave existe dentro de un objeto
+  </Answer>
+  <Answer>
+    Hacer cast a una variable
+  </Answer>
+  <Answer>
+    Iterar las llaves de un objeto 
+  </Answer>
+  <Answer>
+    Retorna un type que contiene todas las llaves de un objeto
+  </Answer>
+</Question>
+
+---
+
+<CodeSurfer>
+
+```ts title="keyof Example"
+const pluck = (obj, keyName) => {
+  return obj[keyName];
+}
+
+const pluckedName = pluck({ 
+  name: 'Julian', 
+  age: 26
+}, 'name');
+
+console.log(pluckedName);
+// Julian
+```
+
+```ts title="keyof Example"
+type SmartGuy = { 
+  name: string, 
+  age: number
+};
+const pluck = (obj: SmartGuy, keyName: 'name' | 'age') => {
+  return obj[keyName];
+}
+
+const pluckedName = pluck({ 
+  name: 'Julian', 
+  age: 26
+}, 'name');
+
+console.log(pluckedName);
+// Julian
+```
+
+```diff 5[31:54]
+```
+
+```ts title="keyof Example"
+type SmartGuy = { 
+  name: string, 
+  age: number
+};
+const pluck = (obj: SmartGuy, keyName: keyof SmartGuy) => {
+  return obj[keyName];
+}
+
+const pluckedName = pluck({ 
+  name: 'Julian', 
+  age: 26
+}, 'name');
+
+console.log(pluckedName);
+// Julian
+```
+
+```diff 5[40:54]
+```
+
+```diff 12[4:9]
+```
+
+</CodeSurfer>
+
+---
+
+### Error
+<img src={pluckError} />
+
+### Suggestion
+<img src={pluckSuggestion} />
+
+---
+
+<Question question={
+  "¿Cuál es la sintaxis para iterar todas las propiedades de otro objeto?"
+}>
+  <Answer>
+    type MyType {'{'} <br />
+      &nbsp;&nbsp;[P in keyof OtherType]: OtherType[P]<br />
+    {'}'}
+  </Answer>
+  <Answer>
+    type MyType {'{'} <br />
+      &nbsp;&nbsp;[key in OtherType]: OtherType[key]<br />
+    {'}'}
+  </Answer>
+  <Answer>
+    <span style={{ fontSize: '40px' }}>
+      type MyType {'{'} <br />
+        &nbsp;&nbsp;[foreach key in OtherType]: OtherType[key]<br />
+      {'}'}
+    </span>
+  </Answer>
+  <Answer>
+    type MyType {'{'} <br />
+      &nbsp;&nbsp;[OtherType: key]: OtherType[key]<br />
+    {'}'}
+  </Answer>
+</Question>
+
+---
+
+<CodeSurfer>
+
+```ts title="Type Mapping"
+type Warrior = {
+  strength: number;
+  name: string;
+  suitColor: string;
+};
+
+/**
+ * If your tsconfig file is set to strict null checks,
+ * this null assign will throw an error
+ */
+const warrior: Warrior = {
+  name: 'Mauricio',
+  strength: null,
+  suitColor: 'red',
+};
+```
+
+```ts title="Type Mapping"
+type Warrior = {
+  strength: number;
+  name: string;
+  suitColor: string;
+};
+
+// Let's make every property nullable!
+// Wolololoooooooooo 🧙
+type ConvertedWarrior = {
+  [P in keyof Warrior]: Warrior[P] | null;
+}
+
+const warrior: Warrior = {
+  name: 'Mauricio',
+  strength: null,
+  suitColor: 'red',
+};
+```
+
+```ts title="Type Mapping"
+type Warrior = {
+  strength: number;
+  name: string;
+  suitColor: string;
+};
+
+// Let's make every property nullable!
+// Wolololoooooooooo 🧙
+type ConvertedWarrior = {
+  [P in keyof Warrior]: Warrior[P]?;
+}
+
+const warrior: Warrior = {
+  name: 'Mauricio',
+  strength: null,
+  suitColor: 'red',
+};
+```
+
+```ts title="Type Mapping"
+type Warrior = {
+  strength: number;
+  name: string;
+  suitColor: string;
+};
+
+// Let's make every property nullable!
+// Wolololoooooooooo 🧙
+type ConvertedWarrior = {
+  [P in keyof Warrior]: Warrior[P] | AnotherType;
+}
+
+const warrior: Warrior = {
+  name: 'Mauricio',
+  strength: null,
+  suitColor: 'red',
+};
+```
+
+```ts title="Type Mapping"
+type Warrior = {
+  strength: number;
+  name: string;
+  suitColor: string;
+};
+
+// Let's make every property nullable!
+// Wolololoooooooooo 🧙
+type ConvertedWarrior = {
+  [P in keyof Warrior]: ComplexObj<Warrior[P]>;
+}
+
+const warrior: Warrior = {
+  name: 'Mauricio',
+  strength: null,
+  suitColor: 'red',
+};
 ```
 
 </CodeSurfer>
@@ -477,135 +1413,6 @@ function someFn3(param: unknown) {
 
 <Question question={
   <span>
-    Si no existieran librerías como <i>Immutable.js</i>, yo sería tu
-    única opción
-  </span>
-}>
-  <Answer>
-    const obj: readonly = {'{'}<br />
-      &nbsp;&nbsp;hello: 'world'<br />
-    };
-  </Answer>
-  <Answer>
-    const readonly obj = {'{'}<br />
-      &nbsp;&nbsp;hello: 'world'<br />
-    };
-  </Answer>
-  <Answer>
-    const obj = {'{'}<br />
-      &nbsp;&nbsp;hello: 'world'<br />
-    } as const;
-  </Answer>
-  <Answer>
-    const obj = {'{'}<br />
-      &nbsp;&nbsp;hello: 'world'<br />
-    };<br />
-    
-    Typescript.freeze(obj);
-  </Answer>
-</Question>
-
----
-
-<CodeSurfer>
-
-```ts title="as const Example"
-const anObjectThatNobodyShouldModify = {
-  transactionAmount: 1200, // 🤑
-  isApproved: true,
-  to: {
-    name: 'Mauricio',
-    id: '😛'
-  }
-};
-```
-
-```ts title="as const Example"
-const anObjectThatNobodyShouldModify = {
-  transactionAmount: 1200, // 🤑
-  isApproved: true,
-  to: {
-    name: 'Mauricio',
-    id: '😛'
-  }
-};
-
-// Is allowed to modify the id 
-anObjectThatNobodyShouldModify.to.id = '💀';
-```
-
-```ts title="as const Example"
-const anObjectThatNobodyShouldModify = {
-  transactionAmount: 1200, // 🤑
-  isApproved: true,
-  to: {
-    name: 'Mauricio',
-    id: '😛'
-  }
-} as const;
-
-// Typescript complains! 🤩
-anObjectThatNobodyShouldModify.to.id = '💀';
-```
-
-```ts title="as const Example"
-const anObjectThatNobodyShouldModify = {
-  transactionAmount: 1200, // 🤑
-  isApproved: true,
-  to: {
-    name: 'Mauricio',
-    id: '😛'
-  }
-} as const;
-
-// Typescript complains! 🤩
-anObjectThatNobodyShouldModify.to.id = '💀';
-
-// Typescript 0 - Immutable.js 1 😔
-(anObjectThatNobodyShouldModify as any).to.id = '💀';
-```
-
-</CodeSurfer>
-
----
-
-### Error
-<img src={asConstError} />
-
----
-
-<Question question={
-  <span>
-    Podría marcar la propiedad <i>count</i> como solo lectura y avisarte si
-    alguien se atreve a profanarla
-  </span>
-}>
-  <Answer>
-    interface MyInterface {'{'}<br />
-      &nbsp;&nbsp;niLoPienses count: number;<br />
-    }
-  </Answer>
-  <Answer>
-    interface MyInterface {'{'}<br />
-      &nbsp;&nbsp;onlyread count: number;<br />
-    }
-  </Answer>
-  <Answer>
-    interface MyInterface {'{'}<br />
-      &nbsp;&nbsp;F count: number;<br />
-    }
-  </Answer>
-  <Answer>
-    interface MyInterface {'{'}<br />
-      &nbsp;&nbsp;readonly count: number;<br />
-    }
-  </Answer>
-</Question>
-
----
-
-<Question question={
-  <span>
     No conoces el tipo de un genérico, y yo podría ser
     útil para averiguarlo...
   </span>
@@ -722,120 +1529,23 @@ const value2: FlattenArray<typeof data> = array[0];
 
 ---
 
-<Question question={<span>Para que sirve el operador <i>keyof</i></span>}>
-  <Answer>
-    Retorna true si la llave existe dentro de un objeto
-  </Answer>
-  <Answer>
-    Hacer cast a una variable
-  </Answer>
-  <Answer>
-    Iterar las llaves de un objeto
-  </Answer>
-  <Answer>
-    Retorna un type que contiene todas las llaves de un objeto
-  </Answer>
-</Question>
-
----
-
-<CodeSurfer>
-
-```ts title="keyof Example"
-const pluck = (obj, keyName) => {
-  return obj[keyName];
-}
-
-const pluckedName = pluck({ 
-  name: 'Julian', 
-  age: 26
-}, 'name');
-
-console.log(pluckedName);
-// Julian
-```
-
-```ts title="keyof Example"
-type SmartGuy = { 
-  name: string, 
-  age: number
-};
-const pluck = (obj: SmartGuy, keyName: 'name' | 'age') => {
-  return obj[keyName];
-}
-
-const pluckedName = pluck({ 
-  name: 'Julian', 
-  age: 26
-}, 'name');
-
-console.log(pluckedName);
-// Julian
-```
-
-```diff 5[31:54]
-```
-
-```ts title="keyof Example"
-type SmartGuy = { 
-  name: string, 
-  age: number
-};
-const pluck = (obj: SmartGuy, keyName: keyof SmartGuy) => {
-  return obj[keyName];
-}
-
-const pluckedName = pluck({ 
-  name: 'Julian', 
-  age: 26
-}, 'name');
-
-console.log(pluckedName);
-// Julian
-```
-
-```diff 5[40:54]
-```
-
-```diff 12[4:9]
-```
-
-</CodeSurfer>
-
----
-
-### Error
-<img src={pluckError} />
-
-### Suggestion
-<img src={pluckSuggestion} />
-
----
-
 <Question question={
-  "Cuál es la sintaxis para iterar todas las propiedades de otro objeto"
+  <span>
+    Sin mí no podrías ejecutar algo de lógica antes del método
+    original
+  </span>
 }>
   <Answer>
-    type MyType {'{'} <br />
-      &nbsp;&nbsp;[P in keyof OtherType]: OtherType[P]<br />
-    {'}'}
+    <span>Ctrl + C, Ctrl + V</span>
   </Answer>
   <Answer>
-    type MyType {'{'} <br />
-      &nbsp;&nbsp;[key in OtherType]: OtherType[key]<br />
-    {'}'}
+    <span>Decorador</span>
   </Answer>
   <Answer>
-    <span style={{ fontSize: '40px' }}>
-      type MyType {'{'} <br />
-        &nbsp;&nbsp;[foreach key in OtherType]: OtherType[key]<br />
-      {'}'}
-    </span>
+    <span>Una partida de Warzone</span>
   </Answer>
   <Answer>
-    type MyType {'{'} <br />
-      &nbsp;&nbsp;[OtherType: key]: OtherType[key]<br />
-    {'}'}
+    <span>Un <i>if</i></span>
   </Answer>
 </Question>
 
@@ -843,188 +1553,78 @@ console.log(pluckedName);
 
 <CodeSurfer>
 
-```ts title="Keys iteration"
-type Warrior = {
-  strength: number;
-  name: string;
-  suitColor: string;
-};
-
-/**
- * If your tsconfig file is set to strict null checks,
- * this null assign will throw an error
- */
-const warrior: Warrior = {
-  name: 'Mauricio',
-  strength: null,
-  suitColor: 'red',
-};
-```
-
-```ts title="Keys iteration"
-type Warrior = {
-  strength: number;
-  name: string;
-  suitColor: string;
-};
-
-// Let's make every property nullable!
-// Wolololoooooooooo 🧙
-type ConvertedWarrior = {
-  [P in keyof Warrior]: Warrior[P] | null;
-}
-
-const warrior: Warrior = {
-  name: 'Mauricio',
-  strength: null,
-  suitColor: 'red',
-};
-```
-
-```ts title="Keys iteration"
-type Warrior = {
-  strength: number;
-  name: string;
-  suitColor: string;
-};
-
-// Let's make every property nullable!
-// Wolololoooooooooo 🧙
-type ConvertedWarrior = {
-  [P in keyof Warrior]: Warrior[P]?;
-}
-
-const warrior: Warrior = {
-  name: 'Mauricio',
-  strength: null,
-  suitColor: 'red',
-};
-```
-
-```ts title="Keys iteration"
-type Warrior = {
-  strength: number;
-  name: string;
-  suitColor: string;
-};
-
-// Let's make every property nullable!
-// Wolololoooooooooo 🧙
-type ConvertedWarrior = {
-  [P in keyof Warrior]: Warrior[P] | AnotherType;
-}
-
-const warrior: Warrior = {
-  name: 'Mauricio',
-  strength: null,
-  suitColor: 'red',
-};
-```
-
-```ts title="Keys iteration"
-type Warrior = {
-  strength: number;
-  name: string;
-  suitColor: string;
-};
-
-// Let's make every property nullable!
-// Wolololoooooooooo 🧙
-type ConvertedWarrior = {
-  [P in keyof Warrior]: ComplexObj<Warrior[P]>;
-}
-
-const warrior: Warrior = {
-  name: 'Mauricio',
-  strength: null,
-  suitColor: 'red',
-};
-```
-
-</CodeSurfer>
-
----
-
-<Question question={
-  <span>Qué significa la palabra reservada <i>never</i></span>
-}>
-  <Answer>
-    Permite que las propiedades de un objeto 
-    acepten null o undefined a la vez.
-  </Answer>
-  <Answer>
-    Es un tipo de variable indicando que ésta nunca tendrá valor.
-  </Answer>
-  <Answer>
-    Se usa en generics para que un tipo genérico esté restringido
-    a ciertos tipos de variable.
-  </Answer>
-  <Answer>
-    Se usa para que la aplicación&nbsp;<i>never</i>&nbsp;falle.
-  </Answer>
-</Question>
-
----
-
-<CodeSurfer>
-
-```ts title="never Example"
-type Person = {
-  role: 'ADMIN' | 'PLAYER' | 'CLIENT',
-}
-```
-
-```ts title="never Example"
-type Person = {
-  role: 'ADMIN' | 'PLAYER' | 'CLIENT',
-}
-
-const doSomething = (person: Person) => {
-  switch (person.role) {
-    case 'ADMIN':
-      break;
-    case 'PLAYER':
-      break;
+```ts title="Decorator example"
+class FancyComponent {
+  deleteUserFromDb(userId: string): void {
+    // Delete the user 
   }
 }
 ```
 
-```ts title="never Example"
-type Person = {
-  role: 'ADMIN' | 'PLAYER' | 'CLIENT',
+```ts title="Decorator example"
+class FancyComponent {
+  deleteUserFromDb(userId: string): void {
+    // Delete the user 
+  }
 }
 
-const doSomething = (person: Person) => {
-  switch (person.role) {
-    case 'ADMIN':
-      break;
-    case 'PLAYER':
-      break;
-    default:
-      // Error here 🥳!
-      const a: never = person.role;
+function AreYouSure(prompt: string) {
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    let originalMethod = descriptor.value;
+
+    descriptor.value = function (...args: any[]) {
+      const confirmation = confirm(prompt);
+
+      if (confirmation) {
+        let result = originalMethod.apply(this, args);
+        return result;
+      }
+    }
   }
 }
 ```
 
-```diff 5:16
+```diff 8:23
 ```
 
-```ts title="never Example"
-const ups = (a: never): never => {
-  throw new Error("Didn't expect to reach here 😨");
-}
+```diff 7
+```
 
-const doSomethingSafer = (person: Person) => {
-  switch (person.role) {
-    case 'ADMIN':
-      break;
-    case 'PLAYER':
-      break;
-    case 'CLIENT':
-      break;
-    default:
-      ups(person.role);
+```diff 7[21:34],16[36:41]
+```
+
+```diff 13
+```
+
+```diff 15
+```
+
+```diff 16
+```
+
+```diff 18[11:22]
+```
+
+```diff 19:20
+```
+
+```ts title="Decorator example"
+class FancyComponent {
+  deleteUserFromDb(userId: string): void {
+    // Delete the user 
+  }
+}
+```
+
+```ts title="Decorator example"
+class FancyComponent {
+  @AreYouSure('This action cannot be rolled back')
+  deleteUserFromDb(userId: string): void {
+    // Delete the user 
   }
 }
 ```
@@ -1033,8 +1633,11 @@ const doSomethingSafer = (person: Person) => {
 
 ---
 
-### Error
-<img src={neverError} />
+<WildcardSet>
+  <Wildcard type="PHONE" used />
+  <Wildcard type="PUBLIC" selected />
+  <Wildcard type="FIFTY" />
+</WildcardSet>
 
 ---
 
