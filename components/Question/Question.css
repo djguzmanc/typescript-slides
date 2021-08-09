@@ -8,9 +8,15 @@
 
 .question__text {
     margin: 10px auto 0;
-    border: solid 2px #B9C2D2;
+    border: solid 2px #b9c2d2;
     border-radius: 40px;
-    background: linear-gradient(90deg, rgba(50,141,204,1) 0%, rgba(2,41,119,1) 30%, rgba(2,41,119,1) 70%, rgba(50,141,204,1) 100%);
+    background: linear-gradient(
+        90deg,
+        rgba(50, 141, 204, 1) 0%,
+        rgba(2, 41, 119, 1) 30%,
+        rgba(2, 41, 119, 1) 70%,
+        rgba(50, 141, 204, 1) 100%
+    );
     padding: 10px 30px;
     width: calc(100vw - 50px);
     text-align: center;
@@ -19,12 +25,25 @@
     font-size: 45px;
 }
 
+.question__prize {
+    margin: 10px auto 0;
+    border: solid 2px #b9c2d2;
+    border-radius: 40px;
+    background: radial-gradient(circle, rgba(231, 206, 47, 1) 0%, rgba(153, 96, 18, 1) 100%) !important;
+    padding: 5px 30px 10px;
+    min-width: 700px;
+    text-align: center;
+    text-shadow: 2px 2px 3px black;
+    color: white;
+    font-size: 35px;
+}
+
 .question__answers {
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
     column-gap: 20px;
-    padding: 30px;
+    padding: 15px 30px 30px;
     height: 100%;
     row-gap: 20px;
 }

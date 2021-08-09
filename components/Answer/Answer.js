@@ -6,6 +6,7 @@ const Answer = ({
     children,
     selected,
     onSelect,
+    removed,
 }) => {
 
     const [isCorrect, setIsCorrect] = React.useState(false);
@@ -13,6 +14,7 @@ const Answer = ({
     const classes = ['answer'];
     selected && classes.push('answer--selected');
     isCorrect && classes.push('answer--correct');
+    removed && classes.push('answer--removed');
 
     return (
         <main
@@ -24,7 +26,9 @@ const Answer = ({
             onClick={() => onSelect()}>
             <span className="answer__index">{index}</span>
             <div className="answer__content">
-                {children}
+                <span>
+                    {children}
+                </span>
             </div>
         </main>
     );

@@ -53,3 +53,8 @@
 .answer--correct .answer__content {
     color: white;
 }
+
+.answer--removed {
+    filter: grayscale();
+    opacity: .5;
+}

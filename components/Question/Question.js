@@ -6,11 +6,13 @@ import SelectableChildren from '../hoc/SelectableChildren/SelectableChildren';
 const indexes = ['A', 'B', 'C', 'D'];
 
 const Question = ({
-    question = '',
+    question,
+    prize,
     children
 }) => {
     return (
         <main className="question" style={{ backgroundImage: `url(${bg})` }}>
+            <h2 className="question__prize">{prize}</h2>
             <h1 className="question__text">{question}</h1>
             <section className="question__answers">
                 <SelectableChildren

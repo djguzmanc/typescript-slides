@@ -8,6 +8,7 @@ import Question from './components/Question/Question';
 import Answer from './components/Answer/Answer';
 import Wildcard from './components/Wildcard/Wildcard';
 import Logo from './components/Logo/Logo';
+import Highlight from './components/Highlight/Highlight';
 import WildcardSet from './components/WildcardSet/WildcardSet';
 import { 
   pluckError,
@@ -18,11 +19,30 @@ import {
   optionalError
 } from './assets/images/ts-intellisense/index';
 
+import init from './assets/images/template/init.png';
+import end1 from './assets/images/template/end1.png';
+import end2 from './assets/images/template/end2.png';
+import ahno from './assets/images/ahno.gif';
+
 export const theme = vsDark;
 
-# Hello 👋
+<div style={{ padding: '30px', textAlign: 'center' }}>
+  <h1>TypeScript 🧙💙</h1>
 
-You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](https://codesurfer.pomb.us)
+  <p>
+    ¿Aún no sabes si <a href="https://www.typescriptlang.org/">
+    <b>TypeScript</b>
+    </a> encaja en tu proyecto?
+  </p>
+
+  <p>
+    ¿Vale la pena?
+  </p>
+</div>
+
+---
+
+<img src={init} style={{ height: '100%' }} />
 
 ---
 
@@ -30,7 +50,9 @@ You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](h
 
 ---
 
-<Question question="¿Quién fue el creador de Typescript y a qué empresa pertenece?">
+<Question 
+  question="¿Quién fue el creador de Typescript y a qué empresa pertenece?"
+  prize="Googlero">
   <Answer>
     Anders Hejlsberg en Microsoft.
   </Answer>
@@ -47,33 +69,34 @@ You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](h
 
 ---
 
-<Question question="¿Es typescript compilado o interpretado?">
+<Question 
+  question="TypeScript es"
+  prize="Googlero voy a tener suerte">
   <Answer>
-    Compilado, los navegadores de hoy en día tienen la capacidad de 
-    interpretar archivos .TS
+    Compilado, el lenguaje es traducido a lenguaje de máquina
+    que es ejecutado por el navegador.
   </Answer>
   <Answer>
-    Interpretado, todo el código es transpilado a .JS, pero 
-    también existe la posibilidad de ser interpretado por los 
-    navegadores actuales.
+    Interpretado, lo navegadores pueden correr código TypeScript.
   </Answer>
   <Answer>
-    Interpretado, porque los archivos de .TS no son entendidos 
-    por el navegador y se genera código JS.
+    Transpilado, porque <i>npm install typescript-interpreter</i>.
   </Answer>
   <Answer>
-    Compilado, TS es capaz de generar un archivo binario. 
+    Transpilado, TypeScript es traducido a lenguaje JavaScript.
   </Answer>
 </Question>
 
 ---
 
-<Question question={
-  <span>
-    Cuando deseas que <i>typescript</i> se comporte como <i>javascript</i>,
-    permitiendo que cualquier variable sea cualquier cosa se usa el tipo
-  </span>
-}>
+<Question 
+  question={
+    <span>
+      Cuando deseas que <i>typescript</i> se comporte como <i>javascript</i>,
+      permitiendo que cualquier variable sea cualquier cosa se usa el tipo
+    </span>
+  }
+  prize="Stackoverflow user">
   <Answer>
     void
   </Answer>
@@ -90,7 +113,42 @@ You are using [MDX Deck](https://github.com/jxnblk/mdx-deck) and [Code Surfer](h
 
 ---
 
-<Question question="Nadie me conoce realmente. La gente piensa que me conoce.">
+<CodeSurfer>
+
+```ts title="any"
+// any
+let variable: any = 'string';
+
+// string
+let variable2 = 'number';
+
+// any
+let variable3;
+```
+
+```diff 1:2
+```
+
+```diff 4:5
+```
+
+```diff 7:8
+```
+
+```ts title="any"
+// any
+let variable: any = 'string';
+
+variable.toFloat(); // ☠️
+```
+
+</CodeSurfer>
+
+---
+
+<Question 
+  question="Nadie me conoce realmente. La gente piensa que me conoce."
+  prize="Stackoverflow user con 10 pestañas a la vez">
   <Answer>
     Cobol
   </Answer>
@@ -129,20 +187,22 @@ if (typeof newVariable === 'string') {
 
 ---
 
-<Question question="Ni Chuck Norris pudo evitar cumplir con este contrato">
+<Question 
+  question="Ni Chuck Norris pudo evitar cumplir con este contrato"
+  prize="Corrige un bug sin try/catch">
   <Answer>
     <span>
-      class Vehicle <i>implements</i> IVehicle
+      Interface
     </span>
   </Answer>
   <Answer>
     <span>
-      class Vehicle <i>extends</i> IVehicle
+      Extends
     </span>
   </Answer>
   <Answer>
-    <span style={{ fontSize: '40px' }}>
-      class Globant <i>extends</i> ICompraDeAcciones
+    <span style={{ fontSize: '35px' }}>
+      Namespace
     </span>
   </Answer>
   <Answer>
@@ -198,22 +258,24 @@ const vehicle: IVehicle = {
 
 ---
 
-<Question question="Si es un parámetro o propiedad opcional, ¿Cuál es la sintaxis correcta para ello?">
+<Question 
+  question="Si es un parámetro o propiedad opcional, ¿Cuál es la sintaxis correcta para ello?"
+  prize="Usa switch en vez de if/else">
   <Answer>
-    function foo(param: Optional{'<'}string>) {'{'}}
+    <Highlight>function</Highlight> foo(param: Optional{'<'}string>) {'{'}}
   </Answer>
   <Answer>
-    interface IAnimal {'{'}<br />
+    <Highlight>interface</Highlight> IAnimal {'{'}<br />
       &nbsp;&nbsp;name: string?;<br />
     }
   </Answer>
   <Answer>
-    interface IAnimal {'{'}<br />
+    <Highlight>interface</Highlight> IAnimal {'{'}<br />
       &nbsp;&nbsp;name: optional;<br />
     }
   </Answer>
   <Answer>
-    interface IAnimal {'{'}<br />
+    <Highlight>interface</Highlight> IAnimal {'{'}<br />
       &nbsp;&nbsp;name?: string;<br />
     }
   </Answer>
@@ -231,9 +293,6 @@ interface IHero 🦸{
 }
 ```
 
-```diff 1[11:18]
-```
-
 ```diff 4
 ```
 
@@ -247,7 +306,7 @@ interface IHero 🦸{
 class Marvel implements IHero 🦸{ }
 ```
 
-```diff 7[7:32]
+```diff 7[7:30]
 ```
 
 ```ts title="Optional Paramater Example"
@@ -260,23 +319,33 @@ interface IHero 🦸{
 class Marvel implements IHero 🦸{
   constructor(
     public secretName: string, 
-    public superPower: string
+    public superPower: string,
     ) { }
   
-  public getSuperHero(): void {
-    console.log(`
-      The name is ${this.secretName} and 
-      his/her superpower is ${this.superPower}
-    `.trim());
+  public getSuperHeroDescription(): string {
+    return `${this.secretName} ${this.superPower}`;
   }
 }
+```
 
-let wonderWoman = new Marvel('Diana', 'Programmer');
-wonderWoman.getSuperHero();
-// Result
-🦸‍♀️
-// The super secret name is Diana and his/her 
-// superpower is Programmer
+```ts title="Optional Paramater Example"
+interface IHero 🦸{
+  secretName: string;
+  superPower: string;
+  superAge?: number;
+}
+
+class Marvel implements IHero 🦸{
+  constructor(
+    public secretName: string, 
+    public superPower: string,
+    // nope, adding superAge is not required
+    ) { }
+  
+  public getSuperHeroDescription(): string {
+    return `${this.secretName} ${this.superPower}`;
+  }
+}
 ```
 
 </CodeSurfer>
@@ -288,14 +357,16 @@ wonderWoman.getSuperHero();
 
 ---
 
-<Question question="¿De que forma se puede realizar casting en TS?">
+<Question 
+  question="¿De que forma se puede realizar casting en TS?"
+  prize="Sabe centrar un div">
   <Answer>
-    d = new Vehicle(); <br />
+    d = <Highlight>new</Highlight> Vehicle(); <br />
     b: Car = d;
   </Answer>
   <Answer>
     <span style={{ fontSize: '30px' }}>
-      let enteredText = (input as HTMLInputElement).value;
+      <Highlight>let</Highlight> enteredText = (input <Highlight>as</Highlight> HTMLInputElement).value;
     </span>
   </Answer>
   <Answer>
@@ -308,33 +379,35 @@ wonderWoman.getSuperHero();
 
 ---
 
-<Question question={
+<Question 
+  question={
   <span>
     Si no existieran librerías como <i>Immutable.js</i>, yo sería tu
     única opción
   </span>
-}>
+  }
+  prize="Trainee">
   <Answer>
-    const obj: readonly = {'{'}<br />
+    <Highlight>const</Highlight> obj: readonly = {'{'}<br />
       &nbsp;&nbsp;hello: 'world'<br />
     };
   </Answer>
   <Answer>
-    const readonly obj = {'{'}<br />
+    <Highlight>const</Highlight> <Highlight>readonly</Highlight> obj = {'{'}<br />
       &nbsp;&nbsp;hello: 'world'<br />
     };
   </Answer>
   <Answer>
-    const obj = {'{'}<br />
+    <Highlight>const</Highlight> obj = {'{'}<br />
       &nbsp;&nbsp;hello: 'world'<br />
-    } as const;
+    } <Highlight>as const</Highlight>;
   </Answer>
   <Answer>
-    const obj = {'{'}<br />
+    <Highlight>const</Highlight> obj = {'{'}<br />
       &nbsp;&nbsp;hello: 'world'<br />
     };<br />
     
-    Typescript.freeze(obj);
+    <Highlight>Typescript</Highlight>.freeze(obj);
   </Answer>
 </Question>
 
@@ -407,42 +480,82 @@ anObjectThatNobodyShouldModify.to.id = '💀';
 
 ---
 
-<Question question={
-  <span>
-    Podría marcar la propiedad <i>count</i> como solo lectura y avisarte si
-    alguien se atreve a profanarla
-  </span>
-}>
+<Question 
+  question={
+    <span>
+      Podría marcar la propiedad <i>count</i> como solo lectura y avisarte si
+      alguien se atreve a profanarla
+    </span>
+  }
+  prize="Junior">
   <Answer>
-    interface MyInterface {'{'}<br />
-      &nbsp;&nbsp;niLoPienses count: number;<br />
+    <Highlight>interface</Highlight> MyInterface {'{'}<br />
+      &nbsp;&nbsp;<Highlight>niLoPienses</Highlight> count: number;<br />
     }
   </Answer>
   <Answer>
-    interface MyInterface {'{'}<br />
-      &nbsp;&nbsp;onlyread count: number;<br />
+    <Highlight>interface</Highlight> MyInterface {'{'}<br />
+      &nbsp;&nbsp;<Highlight>onlyread</Highlight> count: number;<br />
     }
   </Answer>
   <Answer>
-    interface MyInterface {'{'}<br />
-      &nbsp;&nbsp;F count: number;<br />
+    <Highlight>interface</Highlight> MyInterface {'{'}<br />
+      &nbsp;&nbsp;<Highlight>F</Highlight> count: number;<br />
     }
   </Answer>
   <Answer>
-    interface MyInterface {'{'}<br />
-      &nbsp;&nbsp;readonly count: number;<br />
+    <Highlight>interface</Highlight> MyInterface {'{'}<br />
+      &nbsp;&nbsp;<Highlight>readonly</Highlight> count: number;<br />
     }
   </Answer>
 </Question>
 
 ---
 
-<Question question={
-  <span>
-    TypeScript proporciona tres palabras reservadas para controlar 
-    la visibilidad de los miembros de la clase, como propiedades o métodos.
-  </span>
-}>
+<CodeSurfer>
+
+```ts title="readonly Example"
+class Car {
+  readonly owner: Owner;
+
+  modifyOwner(newOwner: Owner) {
+    this.owner = newOwner;
+    // TS complains 😉
+  }
+}
+```
+
+```diff 5:6
+```
+
+```ts title="readonly Example"
+class Car {
+  readonly owner: Owner;
+
+  modifyOwner(newOwner: Owner) {
+    this.owner = newOwner;
+    // TS complains 😉
+  }
+
+  updateOwner(holder: Owner) {
+    this.owner.name = holder.name;
+    // TS allows it 😶
+  }
+}
+```
+
+</CodeSurfer>
+
+---
+
+<Question 
+  question={
+    <span>
+      TypeScript proporciona tres palabras reservadas para controlar 
+      la visibilidad de los miembros de la clase, como propiedades o métodos.
+    </span>
+  }
+  prize="Junior Adv">
   <Answer>
     Esto no existe en Javascript
   </Answer>
@@ -523,20 +636,16 @@ class Hero 🦸{
 ```diff 7
 ```
 
-```diff 10
-```
-
-```diff 11
-```
-
-```diff 12
+```diff 10:13
 ```
 
 </CodeSurfer>
 
 ---
 
-<Question question=" Es una forma sencilla de dar nombres más descriptivos a valores constantes numéricos.">
+<Question 
+  question=" Es una forma elegante de dar nombres más descriptivos a valores constantes numéricos."
+  prize="Semi Senior">
   <Answer>
     Types
   </Answer>
@@ -565,18 +674,24 @@ enum PrintMedia📰{
 }
 ```
 
-``` diff 1
+```ts title="Enums Example"
+enum PrintMedia📰{
+  Newspaper,   // 0
+  Newsletter,  // 1
+  Magazine,    // 2
+  Book         // 3
+}
 ```
 
 ```ts title="Enums Example"
 enum PrintMedia📰{
-  Newspaper = 'NEWSPAPER',
-  Newsletter = 'NEWSLETTER',
-  Magazine = 'MAGAZINE',
-  Book = 'BOOK'
+  Newspaper,   // 0
+  Newsletter,  // 1
+  Magazine,    // 2
+  Book         // 3
 }
 
-function getPrintMediaCode(mediaName: string): string {
+function getPrintMediaCode(mediaName: PrintMedia): string {
   if (mediaName === PrintMedia.Book ) {
       return `You have selected a ${PrintMedia.Book}`
   }
@@ -597,31 +712,32 @@ function getPrintMediaCode(mediaName: string): string {
 
 ---
 
-<Question question={
-  <span>
-    Permiten combinar los miembros de dos o más tipos mediante este operador. 
-    Esto le permite combinar tipos existentes para obtener un solo tipo con 
-    todas las funciones que necesita.
-  </span>  
-}>
+<Question 
+  question={
+    <span>
+      Permiten combinar los miembros de dos o más tipos mediante este operador,
+      obteniendo así un sólo tipo con todas las funciones/propiedades que necesita.
+    </span>  
+  }
+  prize="Semi Senior Adv">
   <Answer>
-    <span style={{ fontSize: '30px' }}>
-      type NewType = Combine{'<'}TypeA, TypeB>
+    <span style={{ fontSize: '35px' }}>
+      <Highlight>type</Highlight> NewType = <Highlight>Combine</Highlight>{'<'}TypeA, TypeB>
     </span>
   </Answer>
   <Answer>
-    <span style={{ fontSize: '30px' }}>
-      type NewType = Merge{'<'}TypeA, TypeB>
+    <span style={{ fontSize: '35px' }}>
+      <Highlight>type</Highlight> NewType = <Highlight>Merge</Highlight>{'<'}TypeA, TypeB>
     </span>
   </Answer>
   <Answer>
     <span>
-      type NewType = TypeA & TypeB
+      <Highlight>type</Highlight> NewType = TypeA & TypeB
     </span>
   </Answer>
   <Answer>
     <span>
-      type NewType = TypeA + TypeB
+      <Highlight>type</Highlight> NewType = TypeA + TypeB
     </span>
   </Answer>
 </Question>
@@ -653,30 +769,34 @@ type Supervisor = Employee & Manager;
 
 // John can both work and manage
 let john: Supervisor;
+john.work();
+john.manage();
 ```
 
 ```diff 9
 ```
 
-```diff 12
+```diff 12:14
 ```
 
 </CodeSurfer>
 
 ---
 
-<Question question="Es una construcción especial en TypeScript que indica que un valor puede ser de varios tipos.">
+<Question 
+  question="Es una construcción especial en TypeScript que indica que un valor puede ser de varios tipos."
+  prize="Senior">
   <Answer>
-    let value: string | number = "Foo";
+    <Highlight>let</Highlight> value: string | number = "Foo";
   </Answer>
   <Answer>
-    let value: string || number = "Foo";
+    <Highlight>let</Highlight> value: string || number = "Foo";
   </Answer>
   <Answer>
-    let value: string && number = "Foo";
+    <Highlight>let</Highlight> value: string && number = "Foo";
   </Answer>
   <Answer>
-    let value: string and number = "Foo";
+    <Highlight>let</Highlight> value: string and number = "Foo";
   </Answer>
 </Question>
 
@@ -708,19 +828,6 @@ class MutantX {
 
 
 ```ts title="Several Types Example"
-class MutantX {
-  constructor(
-    public secretName: string,
-    public superPowers: string | Array<string>,
-    protected isMutant: boolean,
-  ) { }
-
-  public listOfSuperPowers(): string | Array<string> {
-    return this.superPowers;
-  }
-
-}
-
 let professorX = new MutantX('Kereki', [
   'Programmer', 
   'Guru', 
@@ -734,13 +841,24 @@ mystique.listOfSuperPowers();
 // 'Transformation'
 ```
 
+```diff 1[18:28],7[16:26]
+```
+
+```diff 1[40],2:4,5[1],7[37:52]
+```
+
+```diff
+```
+
 </CodeSurfer>
 
 ---
 
-<Question question={
-  <span>¿Qué significa la palabra reservada <i>never</i>?</span>
-}>
+<Question 
+  question={
+    <span>¿Qué significa el tipo de variable <i>never</i>?</span>
+  }
+  prize="Software Architect">
   <Answer>
     Permite que las propiedades de un objeto 
     acepten null o undefined a la vez.
@@ -817,7 +935,6 @@ const doSomething = (person: Person) => {
     case 'CLIENT':
       break;
     default:
-      // Error here 🥳!
       const a: never = person.role;
   }
 }
@@ -854,12 +971,14 @@ const doSomethingSafer = (person: Person) => {
 
 ---
 
-<Question question={
-  <span>
-    Me solían llamar operador diamante, pero soy más que eso, y soy el único que
-    nunca te juzgará por generalizar
-  </span>
-}>
+<Question 
+  question={
+    <span>
+      Me solían llamar operador diamante, pero soy más que eso, y soy el único que
+      nunca te juzgará por generalizar
+    </span>
+  }
+  prize="Architect">
   <Answer>
     <span>Tipo de variable <i>any</i></span>
   </Answer>
@@ -870,7 +989,10 @@ const doSomethingSafer = (person: Person) => {
     <span>Tipo de variable <i>T</i></span>
   </Answer>
   <Answer>
-    <span>Todos los Web UI son iguales 🙄</span>
+    <span>
+      Todos los Web UI son iguales 🙄<br />
+      Att: UX Team
+    </span>
   </Answer>
 </Question>
 
@@ -1022,7 +1144,9 @@ type MappedHTTPResponse<T extends object, K = Partial<T>> = {
 
 ---
 
-<Question question={<span>¿Para que sirve el operador <i>keyof</i>?</span>}>
+<Question 
+  question={<span>¿Para que sirve el operador <i>keyof</i>?</span>}
+  prize="Tech Manager">
   <Answer>
     Retorna true si la llave existe dentro de un objeto
   </Answer>
@@ -1112,28 +1236,69 @@ console.log(pluckedName);
 
 ---
 
-<Question question={
-  "¿Cuál es la sintaxis para iterar todas las propiedades de otro objeto?"
-}>
+<Question 
+  question={
+    "¿Cuál es la sintaxis para iterar todas las propiedades de otro objeto?"
+  }
+  prize="Tech Director">
   <Answer>
-    type MyType {'{'} <br />
-      &nbsp;&nbsp;[P in keyof OtherType]: OtherType[P]<br />
+    <Highlight>type</Highlight> MyType {'{'} <br />
+      &nbsp;&nbsp;[P <Highlight>in keyof</Highlight> OtherType]: OtherType[P]<br />
     {'}'}
   </Answer>
   <Answer>
-    type MyType {'{'} <br />
-      &nbsp;&nbsp;[key in OtherType]: OtherType[key]<br />
+    <Highlight>type</Highlight> MyType {'{'} <br />
+      &nbsp;&nbsp;[key <Highlight>in</Highlight> OtherType]: OtherType[key]<br />
     {'}'}
   </Answer>
   <Answer>
     <span style={{ fontSize: '40px' }}>
-      type MyType {'{'} <br />
-        &nbsp;&nbsp;[foreach key in OtherType]: OtherType[key]<br />
+      <Highlight>type</Highlight> MyType {'{'} <br />
+        &nbsp;&nbsp;[<Highlight>foreach key in</Highlight> OtherType]: OtherType[key]<br />
       {'}'}
     </span>
   </Answer>
   <Answer>
-    type MyType {'{'} <br />
+    <Highlight>type</Highlight> MyType {'{'} <br />
+      &nbsp;&nbsp;[OtherType: key]: OtherType[key]<br />
+    {'}'}
+  </Answer>
+</Question>
+
+---
+
+<WildcardSet>
+  <Wildcard type="PHONE" />
+  <Wildcard type="PUBLIC" />
+  <Wildcard type="FIFTY" />
+</WildcardSet>
+
+---
+
+<Question 
+  question={
+    "¿Cuál es la sintaxis para iterar todas las propiedades de otro objeto?"
+  }
+  prize="Tech Director">
+  <Answer>
+    <Highlight>type</Highlight> MyType {'{'} <br />
+      &nbsp;&nbsp;[P <Highlight>in keyof</Highlight> OtherType]: OtherType[P]<br />
+    {'}'}
+  </Answer>
+  <Answer>
+    <Highlight>type</Highlight> MyType {'{'} <br />
+      &nbsp;&nbsp;[key <Highlight>in</Highlight> OtherType]: OtherType[key]<br />
+    {'}'}
+  </Answer>
+  <Answer>
+    <span style={{ fontSize: '40px' }}>
+      <Highlight>type</Highlight> MyType {'{'} <br />
+        &nbsp;&nbsp;[<Highlight>foreach key in</Highlight> OtherType]: OtherType[key]<br />
+      {'}'}
+    </span>
+  </Answer>
+  <Answer>
+    <Highlight>type</Highlight> MyType {'{'} <br />
       &nbsp;&nbsp;[OtherType: key]: OtherType[key]<br />
     {'}'}
   </Answer>
@@ -1143,7 +1308,7 @@ console.log(pluckedName);
 
 <CodeSurfer>
 
-```ts title="Type Mapping"
+```ts title="Mapped Types"
 type Warrior = {
   strength: number;
   name: string;
@@ -1161,7 +1326,7 @@ const warrior: Warrior = {
 };
 ```
 
-```ts title="Type Mapping"
+```ts title="Mapped Types"
 type Warrior = {
   strength: number;
   name: string;
@@ -1181,7 +1346,7 @@ const warrior: Warrior = {
 };
 ```
 
-```ts title="Type Mapping"
+```ts title="Mapped Types"
 type Warrior = {
   strength: number;
   name: string;
@@ -1201,7 +1366,7 @@ const warrior: Warrior = {
 };
 ```
 
-```ts title="Type Mapping"
+```ts title="Mapped Types"
 type Warrior = {
   strength: number;
   name: string;
@@ -1221,7 +1386,7 @@ const warrior: Warrior = {
 };
 ```
 
-```ts title="Type Mapping"
+```ts title="Mapped Types"
 type Warrior = {
   strength: number;
   name: string;
@@ -1245,12 +1410,14 @@ const warrior: Warrior = {
 
 ---
 
-<Question question={
-  <span>
-    Si grazna como un pato, camina como un pato y se comporta como un pato, entonces
-    es un <i>string</i>
-  </span>
-}>
+<Question 
+  question={
+    <span>
+      Si grazna como un pato, camina como un pato y se comporta como un pato, entonces
+      es un <i>string</i>
+    </span>
+  }
+  prize="Tech Directors Director">
   <Answer>
     if (obj === 🦆) {'{'}<br />
       &nbsp;&nbsp;// Quack!<br />
@@ -1262,19 +1429,57 @@ const warrior: Warrior = {
     }
   </Answer>
   <Answer>
-    if (obj instanceof 🦆) {'{'}<br />
+    if (obj <Highlight>instanceof</Highlight> 🦆) {'{'}<br />
       &nbsp;&nbsp;// Quack!<br />
     }
   </Answer>
   <Answer>
     <span style={{ fontSize: '30px' }}>
-      function (obj: unknown): obj is 🦆 {'{'}<br />
-        &nbsp;&nbsp;if (obj.quack) return true;<br />
+      <Highlight>function</Highlight> (obj: unknown): obj <Highlight>is</Highlight> 🦆 {'{'}<br />
+        &nbsp;&nbsp;if (obj.quack) <Highlight>return true</Highlight>;<br />
       }<br /><br />
-      
-      function assert(obj: unknown): asserts obj is 🦆 {'{'}<br />
-        &nbsp;&nbsp;if (!obj.quack) throw new Error("Not a 🦆");<br />
-      }
+    </span>
+  </Answer>
+</Question>
+
+---
+
+<WildcardSet>
+  <Wildcard type="PHONE" />
+  <Wildcard type="PUBLIC" used />
+  <Wildcard type="FIFTY" />
+</WildcardSet>
+
+---
+
+<Question 
+  question={
+    <span>
+      Si grazna como un pato, camina como un pato y se comporta como un pato, entonces
+      es un <i>string</i>
+    </span>
+  }
+  prize="Tech Directors Director">
+  <Answer>
+    if (obj === 🦆) {'{'}<br />
+      &nbsp;&nbsp;// Quack!<br />
+    }
+  </Answer>
+  <Answer>
+    if (obj is 🦆) {'{'}<br />
+      &nbsp;&nbsp;// Quack!<br />
+    }
+  </Answer>
+  <Answer>
+    if (obj <Highlight>instanceof</Highlight> 🦆) {'{'}<br />
+      &nbsp;&nbsp;// Quack!<br />
+    }
+  </Answer>
+  <Answer>
+    <span style={{ fontSize: '30px' }}>
+      <Highlight>function</Highlight> (obj: unknown): obj <Highlight>is</Highlight> 🦆 {'{'}<br />
+        &nbsp;&nbsp;if (obj.quack) <Highlight>return true</Highlight>;<br />
+      }<br /><br />
     </span>
   </Answer>
 </Question>
@@ -1354,6 +1559,9 @@ function isVehicle(obj: unknown): obj is Vehicle {
 ```diff 1[34:46],6[35:48]
 ```
 
+```diff 1[19:21],6[20:22]
+```
+
 ```diff
 ```
 
@@ -1411,12 +1619,14 @@ function someFn3(param: unknown) {
 
 ---
 
-<Question question={
-  <span>
-    No conoces el tipo de un genérico, y yo podría ser
-    útil para averiguarlo...
-  </span>
-}>
+<Question 
+  question={
+    <span>
+      No conoces el tipo de un genérico, y yo podría ser
+      útil para averiguarlo...
+    </span>
+  }
+  prize="Tech Partner">
   <Answer>
     typeof
   </Answer>
@@ -1427,7 +1637,7 @@ function someFn3(param: unknown) {
     infer
   </Answer>
   <Answer>
-    F
+    No es posible
   </Answer>
 </Question>
 
@@ -1442,6 +1652,14 @@ const data = ['hello', 12, { world: null }];
 ```ts title="infer Example"
 const data = ['hello', 12, { world: null }];
 typeof data; // (string | number | { world: null })[]
+```
+
+```ts title="infer Example"
+const data = ['hello', 12, { world: null }];
+typeof data; // (string | number | { world: null })[]
+const valueWithType: string = data[0];
+// Type error: type (string | number | { world: null })[]
+// cannot be assigned to type string
 ```
 
 ```ts title="infer Example"
@@ -1500,7 +1718,7 @@ const innerValue: FlattenArray<typeof array> = array[0];
 // string | number
 ```
 
-```diff 11[32:43]
+```diff 10[7:11],11[32:43]
 ```
 
 ```ts title="infer Example"
@@ -1529,12 +1747,14 @@ const value2: FlattenArray<typeof data> = array[0];
 
 ---
 
-<Question question={
-  <span>
-    Sin mí no podrías ejecutar algo de lógica antes del método
-    original
-  </span>
-}>
+<Question 
+  question={
+    <span>
+      Sin mí no podrías ejecutar algo de lógica antes del método
+      original
+    </span>
+  }
+  prize="CTO">
   <Answer>
     <span>Ctrl + C, Ctrl + V</span>
   </Answer>
@@ -1542,6 +1762,38 @@ const value2: FlattenArray<typeof data> = array[0];
     <span>Decorador</span>
   </Answer>
   <Answer>
+    <span>Una partida de Warzone</span>
+  </Answer>
+  <Answer>
+    <span>Un <i>if</i></span>
+  </Answer>
+</Question>
+
+---
+
+<WildcardSet>
+  <Wildcard type="PHONE" used />
+  <Wildcard type="PUBLIC" used />
+  <Wildcard type="FIFTY" />
+</WildcardSet>
+
+---
+
+<Question 
+  question={
+    <span>
+      Sin mí no podrías ejecutar algo de lógica antes del método
+      original
+    </span>
+  }
+  prize="CTO">
+  <Answer removed>
+    <span>Ctrl + C, Ctrl + V</span>
+  </Answer>
+  <Answer>
+    <span>Decorador</span>
+  </Answer>
+  <Answer removed>
     <span>Una partida de Warzone</span>
   </Answer>
   <Answer>
@@ -1633,12 +1885,16 @@ class FancyComponent {
 
 ---
 
-<WildcardSet>
-  <Wildcard type="PHONE" used />
-  <Wildcard type="PUBLIC" selected />
-  <Wildcard type="FIFTY" />
-</WildcardSet>
+### No me convenciste de usar TypeScript
+
+<img src={ahno} style={{ height: '100%' }} />
+
+#### ¿Ah no?
 
 ---
 
-# Todo terminó señores
+<img src={end1} style={{ height: '100%' }} />
+
+---
+
+<img src={end2} style={{ height: '100%' }} />
