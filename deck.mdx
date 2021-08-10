@@ -627,13 +627,10 @@ class Hero 🦸{
   }
 
   getMutant(): void {
-    this.getHero();
-    console.log(this.verifyHero());
+    this.getHero();    // public
+    this.verifyHero(); // protected
   }
 }
-```
-
-```diff 7
 ```
 
 ```diff 10:13
@@ -691,21 +688,21 @@ enum PrintMedia📰{
   Book         // 3
 }
 
-function getPrintMediaCode(mediaName: PrintMedia): string {
-  if (mediaName === PrintMedia.Book ) {
-      return `You have selected a ${PrintMedia.Book}`
+function favoritePrintMedia(mediaName: PrintMedia): string {
+  switch (mediaName) {
+    case PrintMedia.Newspaper:
+      return `You are a newspaper man! ❤️`
+    case PrintMedia.Newsletter:
+      return `Newsletter for the win! ❤️`
+    case PrintMedia.Magazine:
+      return `Magazine for real! ❤️`
+    case PrintMedia.Book:
+      return `And e-books too! ❤️`
   }
-  return PrintMedia.Newspaper;
 }
 ```
 
-```diff 9[21:36]
-```
-
-```diff 10[34:53]
-```
-
-```diff 12[10:31]
+```diff 10[10:29],12[10:30],14[10:28],16[10:24]
 ```
 
 </CodeSurfer>
@@ -804,7 +801,7 @@ john.manage();
 
 <CodeSurfer>
 
-```ts title="Several Types Example"
+```ts title="Type Merge"
 class MutantX {
   constructor(
     public secretName: string,
@@ -823,11 +820,11 @@ class MutantX {
 ```diff 4
 ```
 
-```diff 8
+```diff 8[31:52],9[12:27]
 ```
 
 
-```ts title="Several Types Example"
+```ts title="Type Merge"
 let professorX = new MutantX('Kereki', [
   'Programmer', 
   'Guru', 
